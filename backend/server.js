@@ -130,9 +130,16 @@ app.use('/api/receipt', receiptRoutes);
 // =====================================================
 
 const frontendPath = path.join(__dirname, '../frontend');
-app.use(express.static(frontendPath));
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Serve static assets. In production, prefer index.min.html
+app.use(express.static(frontendPath, {
+  index: isProduction ? 'index.min.html' : 'index.html'
+}));
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
+  const indexFile = isProduction ? 'index.min.html' : 'index.html';
+  res.sendFile(path.join(frontendPath, indexFile));
 });
 
 // =====================================================

@@ -194,8 +194,11 @@
         <div class="about-image-wrapper">
           <div class="spiritual-ring ring-1"></div>
           <div class="spiritual-ring ring-2"></div>
-          <div class="about-image-card glass-card">
-            <img src="astrolger.png" alt="Jaykanth Malhasi - Nadi Astrologer" class="about-img" />
+          <div class="about-image-card glass-card shimmer">
+            <picture>
+              <source srcset="astrolger.webp" type="image/webp">
+              <img src="astrolger.png" alt="Jaykanth Malhasi - Nadi Astrologer" class="about-img" loading="lazy" onload="this.closest('.about-image-card').classList.remove('shimmer')" />
+            </picture>
             <div class="about-badge">
               <span class="badge-icon">🔱</span>
               <div class="badge-texts">
@@ -367,7 +370,7 @@
         <!-- 6. Nadi Jyotish Consultation -->
         <article class="service-card" id="service-nadi-jyotish">
           <div class="service-icon-wrapper">
-            <span class="service-icon">🌿</span>
+            <span class="service-icon">🔱</span>
           </div>
           <h3 class="service-title">Nadi Jyotish</h3>
           <p class="service-desc">Seek ultimate wisdom and guidance regarding past, present, and future through the divine Tamil thumb-print palm leaf readings.</p>
@@ -448,9 +451,31 @@
           <p>Restore harmony and understanding within your family through cosmic healing and Vastu corrections.</p>
         </div>
         <div class="problem-card" id="prob-health">
-          <div class="problem-icon">🌿</div>
-          <h3>Health & Peace Guidance</h3>
-          <p>Understand health vulnerabilities in your chart and get astrological guidance for physical and mental wellness.</p>
+          <div class="problem-icon">
+            <svg class="problem-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 50px; height: 50px; margin: 0 auto; display: block;">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold-primary)" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.6" />
+              <circle cx="50" cy="50" r="38" fill="none" stroke="var(--gold-primary)" stroke-width="1" opacity="0.4" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke="var(--gold-primary)" stroke-width="1" stroke-dasharray="5 5" opacity="0.8" />
+              <line x1="50" y1="5" x2="50" y2="95" stroke="var(--gold-primary)" stroke-width="1" opacity="0.3" />
+              <line x1="5" y1="50" x2="95" y2="50" stroke="var(--gold-primary)" stroke-width="1" opacity="0.3" />
+              <line x1="18.2" y1="18.2" x2="81.8" y2="81.8" stroke="var(--gold-primary)" stroke-width="1" opacity="0.3" />
+              <line x1="18.2" y1="81.8" x2="81.8" y2="18.2" stroke="var(--gold-primary)" stroke-width="1" opacity="0.3" />
+              <circle cx="50" cy="5" r="3" fill="var(--gold-primary)" />
+              <circle cx="50" cy="95" r="3" fill="var(--gold-primary)" />
+              <circle cx="5" cy="50" r="3" fill="var(--gold-primary)" />
+              <circle cx="95" cy="50" r="3" fill="var(--gold-primary)" />
+              <circle cx="18.2" cy="18.2" r="2.5" fill="var(--gold-primary)" />
+              <circle cx="81.8" cy="81.8" r="2.5" fill="var(--gold-primary)" />
+              <circle cx="18.2" cy="81.8" r="2.5" fill="var(--gold-primary)" />
+              <circle cx="81.8" cy="18.2" r="2.5" fill="var(--gold-primary)" />
+              <polygon points="50,20 76,65 24,65" fill="none" stroke="var(--gold-primary)" stroke-width="1.5" opacity="0.8" />
+              <polygon points="50,80 76,35 24,35" fill="none" stroke="var(--gold-primary)" stroke-width="1.5" opacity="0.8" />
+              <circle cx="50" cy="50" r="4" fill="var(--gold-primary)" />
+              <path d="M50 40 L52 48 L60 50 L52 52 L50 60 L48 52 L40 50 L48 48 Z" fill="var(--gold-light)" />
+            </svg>
+          </div>
+          <h3>Nakshatra Nadi</h3>
+          <p>Explore your destiny paths, birth constellation structures, and customized cosmic remedies for life's challenges.</p>
         </div>
       </div>
     </div>
@@ -465,23 +490,83 @@
         <p class="section-subtitle">Deep dive into ancient predicting methods with structured training mentored by Jaykanth Malhasi</p>
       </div>
 
-      <div class="courses-container">
-        <!-- KP Astrology Course Card -->
-        <article class="course-card glass-card">
-          <div class="course-badge-tag">Popular Course</div>
+      <div class="courses-grid">
+        <!-- 1. Face Reading -->
+        <article class="course-card glass-card featured-course-card">
+          <div class="course-badge-tag highlight-badge">🔥 TOP COURSE • POPULAR</div>
           <div class="course-header">
-            <div class="course-icon">🎓</div>
-            <h3 class="course-card-title">KP Astrology Masterclass</h3>
-            <p class="course-card-sub">Stellar Astrology from Basics to Predictive Mastery</p>
+            <div class="course-icon">📖</div>
+            <h3 class="course-card-title">Face Reading Masterclass</h3>
+            <p class="course-card-sub">Ancient Art of Physiognomy & Character Analysis</p>
           </div>
           <div class="course-body">
-            <p class="course-desc">Master the highly accurate Krishnamurti Paddhati (KP) system. Learn sub-lords, house group significators, and timing of events with practical birth charts.</p>
+            <p class="course-desc">Master the ancient art of reading character traits, destiny lines, and health indicators directly from facial features.</p>
             <ul class="course-features">
-              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 12 Weeks (Interactive Sessions)</li>
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 6 Weeks (Interactive Sessions)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Beginner to Professional</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Professional Certificate Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Live Online + Recorded Sessions</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Live Face Analysis Practicals</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹12,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Face Reading Course" 
+                    data-amount="1200000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 2. Vedic Astrology -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🔯</div>
+            <h3 class="course-card-title">Vedic Astrology</h3>
+            <p class="course-card-sub">Foundations of Parashari System & Chart Reading</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Comprehensive training in Parashari system. Understand houses, planets, nakshatras, dashas, and transit calculations.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 16 Weeks (Detailed Training)</li>
               <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Beginner to Advanced</li>
               <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Professional Certificate Included</li>
-              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Online Lectures + Class Recordings</li>
-              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Weekly Practical Chart Analysis</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Live Interactive Classes</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> 50+ Real Charts Analyzed</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹21,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Vedic Astrology Course" 
+                    data-amount="2100000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 3. Bhrigu Nandi Nadi -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🪐</div>
+            <h3 class="course-card-title">Bhrigu Nandi Nadi</h3>
+            <p class="course-card-sub">Rapid Predictions via Planetary Conjunctions</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Learn the secrets of planetary combinations, conjunctions, and transits to make instant predictions without degree calculations.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 8 Weeks (Accelerated Class)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Intermediate to Advanced</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Professional Certificate Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Online Lectures + Recordings</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Direct Event Prediction Techniques</li>
             </ul>
           </div>
           <div class="course-footer">
@@ -490,8 +575,188 @@
               <div class="course-price">₹14,000</div>
             </div>
             <button class="btn btn-gold pay-btn course-enroll-btn" 
-                    data-plan="KP Astrology Course" 
+                    data-plan="Bhrigu Nandi Nadi Course" 
                     data-amount="1400000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 4. Vedic Numerology -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🔢</div>
+            <h3 class="course-card-title">Vedic Numerology</h3>
+            <p class="course-card-sub">Grid Analysis, Name Correction & Predictions</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Understand the power of numbers from 1 to 9. Learn date of birth analysis, grid calculations, name corrections, and destiny paths.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 6 Weeks (Practical Study)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Beginner to Intermediate</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Certificate of Mastery Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Interactive Live Webinars</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Personal Grid & Name Correction</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹14,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Vedic Numerology Course" 
+                    data-amount="1400000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 5. Jamakol -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🏹</div>
+            <h3 class="course-card-title">Jamakol Prasannam</h3>
+            <p class="course-card-sub">Instant Query Resolution & South Indian Prashna</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Master the highly accurate Jamakol Prasannam system, the rapid South Indian transit-based query resolution method.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 4 Weeks (Crash Course)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Intermediate to Professional</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Practical Certificate Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Online lectures + detailed notes</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Live Query Practice Sessions</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹9,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Jamakol Prasannam Course" 
+                    data-amount="900000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 6. Palmistry -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">✋</div>
+            <h3 class="course-card-title">Palmistry Masterclass</h3>
+            <p class="course-card-sub">Decode Hand Shapes, Lines & Mounts of Destiny</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Read life, heart, head, and fate lines. Understand mounts, signs, and hand shapes to decode destiny and personality.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 8 Weeks (Detailed Study)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> Beginner to Professional</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Professional Certificate Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Video Lectures + PDF Manuals</li>
+              <li><span class="feature-bullet">📊</span> <strong>Hands-on:</strong> Practical Print Analysis Sessions</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹14,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Palmistry Course" 
+                    data-amount="1400000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 7. Meditation Workshop -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🧘</div>
+            <h3 class="course-card-title">Meditation Workshop</h3>
+            <p class="course-card-sub">Chakra Activation & Spiritual Mind Calming</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Activate your inner chakras and calm your mind. Learn spiritual breathing protocols and mindfulness techniques.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 2 Weeks (Interactive Sessions)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> All Levels Welcome</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Participation Certificate</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Daily Live Guided Sessions</li>
+              <li><span class="feature-bullet">🧘</span> <strong>Focus:</strong> Mind Calming & Inner Balance</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹2,999</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Meditation Workshop" 
+                    data-amount="299900">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 8. Lama Fera Healing -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🏮</div>
+            <h3 class="course-card-title">Lama Fera Healing</h3>
+            <p class="course-card-sub">Basic + Advance Level Buddhist Energy Healing</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Learn the powerful Buddhist healing technique using symbols and Shalvik Mantra vibrations to clear negative energies.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">📅</span> <strong>Duration:</strong> 6 Weeks (Specialized Program)</li>
+              <li><span class="feature-bullet">📈</span> <strong>Level:</strong> All Levels Welcome</li>
+              <li><span class="feature-bullet">🏆</span> <strong>Certification:</strong> Master Healer Certificate Included</li>
+              <li><span class="feature-bullet">💻</span> <strong>Learning Mode:</strong> Online attunements & classes</li>
+              <li><span class="feature-bullet">🙌</span> <strong>Hands-on:</strong> Aura Cleansing & Healing Protocols</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Total Fee</span>
+              <div class="course-price">₹15,000</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Lama Fera Healing Course" 
+                    data-amount="1500000">
+              ✨ Enroll Now
+            </button>
+          </div>
+        </article>
+
+        <!-- 9. Healing Session -->
+        <article class="course-card glass-card">
+          <div class="course-header">
+            <div class="course-icon">🙌</div>
+            <h3 class="course-card-title">Spiritual Healing Session</h3>
+            <p class="course-card-sub">Reiki, Lama Fera or Tibetan Spiritual Protection</p>
+          </div>
+          <div class="course-body">
+            <p class="course-desc">Personalized energy healing session (Reiki, Lama Fera, or Tibetan) to restore spiritual protection and remove energy blockages.</p>
+            <ul class="course-features">
+              <li><span class="feature-bullet">💻</span> <strong>Mode:</strong> In-Person / Remote Session</li>
+              <li><span class="feature-bullet">⏱️</span> <strong>Duration:</strong> 30-45 Minutes per Seating</li>
+              <li><span class="feature-bullet">🔱</span> <strong>Practitioner:</strong> Devoted disciple in Nath Tradition</li>
+              <li><span class="feature-bullet">🌀</span> <strong>Focus:</strong> Chakra Balancing & Negativity Removal</li>
+              <li><span class="feature-bullet">💬</span> <strong>Support:</strong> Spiritual Guidance & Advice</li>
+            </ul>
+          </div>
+          <div class="course-footer">
+            <div class="course-price-box">
+              <span class="course-price-lbl">Fee per Session</span>
+              <div class="course-price">₹500</div>
+            </div>
+            <button class="btn btn-gold pay-btn course-enroll-btn" 
+                    data-plan="Healing Session" 
+                    data-amount="50000">
               ✨ Enroll Now
             </button>
           </div>
@@ -1116,8 +1381,17 @@
               <option value="Name Numerology">🔢 Name Numerology</option>
               <option value="KP Astrology Course">🎓 KP Astrology Course</option>
               <option value="Ancient Mystical Protocols & Divine Yantras">🔯 Divine Yantras</option>
-              <option value="Nadi Jyotish Consultation">🌿 Nadi Jyotish Consultation</option>
+              <option value="Nadi Jyotish Consultation">🔱 Nadi Jyotish Consultation</option>
               <option value="Tarot Card Reading">🔮 Tarot Card Reading</option>
+              <option value="Face Reading Course">📖 Face Reading Course</option>
+              <option value="Vedic Astrology Course">🔯 Vedic Astrology Course</option>
+              <option value="Bhrigu Nandi Nadi Course">🪐 Bhrigu Nandi Nadi Course</option>
+              <option value="Vedic Numerology Course">🔢 Vedic Numerology Course</option>
+              <option value="Jamakol Prasannam Course">🏹 Jamakol Prasannam Course</option>
+              <option value="Palmistry Course">✋ Palmistry Course</option>
+              <option value="Meditation Workshop">🧘 Meditation Workshop</option>
+              <option value="Lama Fera Healing Course">🏮 Lama Fera Healing Course</option>
+              <option value="Healing Session">🙌 Healing Session</option>
             </select>
             <span class="field-error" id="err-b-type"></span>
           </div>
@@ -1371,6 +1645,36 @@
         <p class="upi-security-note">
           🔒 Secure peer-to-peer transaction. Confirm after paying in your app.
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MOBILE QR MODAL ===================== -->
+  <div class="modal-overlay" id="mobileQrModal" role="dialog" aria-modal="true" aria-labelledby="mobileQrTitle" hidden>
+    <div class="modal-container qr-modal-container glass-card">
+      <button class="modal-close-btn" id="mobileQrClose" aria-label="Close popup">✕</button>
+      <div class="qr-popup-content">
+        <div class="qr-popup-header">
+          <span class="qr-popup-icon">🔮</span>
+          <h2 class="modal-title" id="mobileQrTitle" style="color: var(--gold-primary);">Scan &amp; Connect with NadiJyotish</h2>
+          <p class="modal-subtitle">Get instant astrological guidance</p>
+        </div>
+        <div class="qr-popup-body" style="text-align: center; padding: 20px 0;">
+          <div class="qr-image-wrapper" style="background: #fff; padding: 12px; border-radius: var(--radius-md); display: inline-block; margin-bottom: 16px; border: 1px solid rgba(246,201,14,0.25);">
+            <img src="qr-connect.webp" alt="NadiJyotish WhatsApp QR Code" class="qr-popup-img" loading="lazy" style="width: 200px; height: 200px; display: block;" />
+          </div>
+          <p class="qr-popup-text" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">Scan this QR with another device, or tap below to chat with us directly.</p>
+        </div>
+        <div class="qr-popup-footer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+          <a href="https://wa.me/917999464526?text=Hi%2C%20I%20want%20to%20connect%20with%20NadiJyotish" 
+             class="btn btn-whatsapp btn-full" 
+             target="_blank" rel="noopener noreferrer">
+            💬 Connect on WhatsApp
+          </a>
+          <button type="button" class="btn btn-gold btn-full" id="qr-book-btn">
+            ✨ Book Consultation
+          </button>
+        </div>
       </div>
     </div>
   </div>

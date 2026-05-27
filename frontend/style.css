@@ -2875,11 +2875,11 @@ body::before {
   pointer-events: none;
 }
 
-.courses-container {
-  display: flex;
-  justify-content: center;
-  max-width: 760px;
-  margin: 0 auto;
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
 }
 
 .course-card {
@@ -3058,6 +3058,13 @@ body::before {
   .course-enroll-btn {
     width: 100%;
   }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 0 auto;
+    gap: 24px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -3068,6 +3075,144 @@ body::before {
   
   .about-stat-item {
     align-items: center;
+  }
+}
+
+/* Tablet / Small Laptop Breakpoint (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* =====================================================================
+   ADDITIONAL STYLES FOR NEW FEATURES
+   Featured cards, Shimmer Loaders, Mobile QR modal, Nakshatra SVG
+   ===================================================================== */
+
+/* Featured Face Reading Card */
+.featured-course-card {
+  border: 1px solid rgba(246, 201, 14, 0.7) !important;
+  box-shadow: 0 0 25px rgba(246, 201, 14, 0.15), var(--shadow-card);
+  animation: glow-pulse 3s infinite alternate;
+}
+
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(246, 201, 14, 0.15), var(--shadow-card);
+    border-color: rgba(246, 201, 14, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(246, 201, 14, 0.35), var(--shadow-card);
+    border-color: rgba(246, 201, 14, 0.9);
+  }
+}
+
+/* Highlight badge */
+.highlight-badge {
+  background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(255, 78, 80, 0.3);
+  font-weight: 800 !important;
+}
+
+/* Shimmer Loading Skeleton */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  animation: shimmer-pulse 1.8s infinite;
+  z-index: 2;
+}
+
+@keyframes shimmer-pulse {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Custom SVG icon for problem-card */
+.problem-svg-icon {
+  filter: drop-shadow(0 0 10px rgba(246, 201, 14, 0.5));
+  transition: var(--transition-mid);
+}
+
+.problem-card:hover .problem-svg-icon {
+  transform: scale(1.15) rotate(15deg);
+  filter: drop-shadow(0 0 15px rgba(246, 201, 14, 0.8));
+}
+
+/* Mobile QR popup styles */
+.qr-modal-container {
+  max-width: 420px;
+  width: 90%;
+  padding: 32px 24px;
+  border-radius: var(--radius-xl);
+  border: var(--border-gold);
+  animation: qrScaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes qrScaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.qr-popup-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 8px;
+  animation: qrIconPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes qrIconPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(246, 201, 14, 0.4)); }
+  50% { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 12px rgba(246, 201, 14, 0.8)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(246, 201, 14, 0.4)); }
+}
+
+/* Ensure smooth GPU-accelerated transitions & animations */
+.hero-illustration, .stars, .stat-card, .service-card, .course-card, .problem-card, .zodiac-card, .testimonial-card, .float-whatsapp, .scroll-top {
+  will-change: transform, opacity;
+  transform: translate3d(0,0,0); /* Forces GPU layer creation */
+}
+
+/* Optimization for low-end mobile devices: reduce parallax and starry backgrounds */
+@media (max-width: 768px) {
+  /* Disable heavy continuous animations for mobile */
+  .stars {
+    animation: none !important;
+  }
+  
+  .stars-bg {
+    opacity: 0.4;
+  }
+  
+  .float-element {
+    animation: none !important; /* Stop floating element animation to save CPU */
+  }
+  
+  .zodiac-orbit {
+    animation: orbit-rotate 40s linear infinite; /* Slow down rotation to save CPU */
   }
 }
 

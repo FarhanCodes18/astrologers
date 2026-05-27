@@ -35,7 +35,7 @@
    1. CONSTANTS & GLOBAL STATE
    ===================================================================== */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://astrologers.onrender.com';
 
 // Add your Razorpay Key ID here (matches the one in .env)
 const RAZORPAY_KEY_ID = 'rzp_test_YourRazorpayKeyHere';
@@ -61,9 +61,18 @@ const PLAN_META = {
   'Ancient Mystical Protocols & Divine Yantras': { icon: '🔯', duration: 'Custom energized',   price: 5000  },
   'Online Vastu Consultation':                   { icon: '🏛️', duration: 'Vastu Analysis',     price: 2500  },
   'Offline Vastu Visit':                         { icon: '🏡', duration: 'In-person Visit',    price: 7000  },
-  'Nadi Jyotish Consultation':                   { icon: '🌿', duration: 'Palm Leaf Reading',  price: 21000 },
+  'Nadi Jyotish Consultation':                   { icon: '🔱', duration: 'Palm Leaf Reading',  price: 21000 },
   'Name Numerology':                             { icon: '🔢', duration: 'Numerology Report',  price: 2100  },
   'Tarot Card Reading':                          { icon: '🔮', duration: '2 Questions Tarot',  price: 499   },
+  'Face Reading Course':                         { icon: '📖', duration: '6 Week Course',      price: 12000 },
+  'Vedic Astrology Course':                      { icon: '🔯', duration: '16 Week Course',     price: 21000 },
+  'Bhrigu Nandi Nadi Course':                    { icon: '🪐', duration: '8 Week Course',      price: 14000 },
+  'Vedic Numerology Course':                     { icon: '🔢', duration: '6 Week Course',      price: 14000 },
+  'Jamakol Prasannam Course':                    { icon: '🏹', duration: '4 Week Course',      price: 9000  },
+  'Palmistry Course':                            { icon: '✋', duration: '8 Week Course',      price: 14000 },
+  'Meditation Workshop':                         { icon: '🧘', duration: '2 Week Workshop',    price: 2999  },
+  'Lama Fera Healing Course':                    { icon: '🏮', duration: '6 Week Course',      price: 15000 },
+  'Healing Session':                             { icon: '🙌', duration: '30-45 Min Seating',  price: 500   },
 };
 
 /**
@@ -99,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollTopButton();
   initHoroscopeDate();
   initActiveNavLinks();
+  initMobileQrPopup();     // Automatically shows WhatsApp QR code popup on mobile once per session
 });
 
 /* =====================================================================
@@ -559,6 +569,17 @@ function openBookingModal(plan, amount, btn) {
     form.reset();
     form.querySelectorAll('.field-error').forEach(el => el.textContent = '');
     form.querySelectorAll('input, textarea, select').forEach(el => el.style.borderColor = '');
+    
+    // Auto-select dropdown option matching the plan
+    const typeSelect = document.getElementById('b-type');
+    if (typeSelect) {
+      for (let i = 0; i < typeSelect.options.length; i++) {
+        if (typeSelect.options[i].value === plan || typeSelect.options[i].text.includes(plan)) {
+          typeSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
   }
 
   // ---- Reset slot grid ----
@@ -1418,6 +1439,11 @@ document.addEventListener('keydown', (e) => {
     if (document.getElementById('receiptModal')?.classList.contains('is-active')) {
       closeModal('receiptModal');
     }
+
+    // Close Mobile QR modal on Escape
+    if (document.getElementById('mobileQrModal')?.classList.contains('is-active')) {
+      closeModal('mobileQrModal');
+    }
   }
 });
 
@@ -1484,4 +1510,47 @@ function updateServicePrice(selectEl) {
     btn.setAttribute('data-amount', amount);
     btn.textContent = `✨ Book Now — ₹${price}`;
   }
+}
+
+/* =====================================================================
+   25. MOBILE QR POPUP MODULE
+   ===================================================================== */
+function initMobileQrPopup() {
+  const modal = document.getElementById('mobileQrModal');
+  const closeBtn = document.getElementById('mobileQrClose');
+  const bookBtn = document.getElementById('qr-book-btn');
+  if (!modal || !closeBtn || !bookBtn) return;
+
+  // Viewport / Screen check — only trigger on screen sizes <= 768px (Mobile/Tablet)
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (!isMobile) return;
+
+  // Session check — only show once per browser session
+  if (sessionStorage.getItem('nadiQrPopupShown') === 'true') return;
+
+  // Automatically show after a short delay (e.g. 2.5 seconds)
+  setTimeout(() => {
+    showModal('mobileQrModal');
+    sessionStorage.setItem('nadiQrPopupShown', 'true');
+  }, 2500);
+
+  // Close handlers
+  closeBtn.addEventListener('click', () => {
+    closeModal('mobileQrModal');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target.id === 'mobileQrModal') {
+      closeModal('mobileQrModal');
+    }
+  });
+
+  // Booking CTA inside popup
+  bookBtn.addEventListener('click', () => {
+    closeModal('mobileQrModal');
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 }
