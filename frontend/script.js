@@ -54,9 +54,16 @@ const TIME_SLOTS = [
 
 /** Plan metadata — maps plan name to its display info */
 const PLAN_META = {
-  'Basic Consultation':      { icon: '🌙', duration: '30 Minute Session', price: 199  },
-  'Detailed Kundli Reading': { icon: '⭐', duration: '60 Minute Session', price: 499  },
-  'Premium Consultation':    { icon: '👑', duration: '90 Minute Session', price: 999  },
+  'Single Question Consultation':                { icon: '📜', duration: '15 Minute Session', price: 499   },
+  'Online Full Kundli Consultation':             { icon: '📜', duration: '45 Minute Session', price: 1100  },
+  'Offline Consultation':                        { icon: '📜', duration: '60 Minute Session', price: 2100  },
+  'KP Astrology Course':                         { icon: '🎓', duration: '12 Week Course',     price: 14000 },
+  'Ancient Mystical Protocols & Divine Yantras': { icon: '🔯', duration: 'Custom energized',   price: 5000  },
+  'Online Vastu Consultation':                   { icon: '🏛️', duration: 'Vastu Analysis',     price: 2500  },
+  'Offline Vastu Visit':                         { icon: '🏡', duration: 'In-person Visit',    price: 7000  },
+  'Nadi Jyotish Consultation':                   { icon: '🌿', duration: 'Palm Leaf Reading',  price: 21000 },
+  'Name Numerology':                             { icon: '🔢', duration: 'Numerology Report',  price: 2100  },
+  'Tarot Card Reading':                          { icon: '🔮', duration: '2 Questions Tarot',  price: 499   },
 };
 
 /**
@@ -87,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFAQAccordion();
   initPaymentButtons();    // Opens booking modal instead of payment directly
   initBookingModal();      // Sets up booking form + slot loader
+  initUPIModal();          // Sets up UPI payment modal events
   initReceiptModal();      // Sets up receipt action buttons
   initScrollTopButton();
   initHoroscopeDate();
@@ -233,7 +241,7 @@ function initScrollReveal() {
    8. COUNTER ANIMATIONS
    ===================================================================== */
 function initCounterAnimations() {
-  const statCards = document.querySelectorAll('.stat-card[data-target]');
+  const statCards = document.querySelectorAll('.stat-card[data-target], .about-stat-item[data-target]');
   if (!statCards.length) return;
 
   const animateCounter = (el, target, suffix, isDecimal) => {
@@ -863,13 +871,6 @@ function selectSlot(slot, clickedBtn) {
    15. PAYMENT — Razorpay Integration
    ===================================================================== */
 
-/**
- * Initiates Razorpay payment after booking is created.
- * Calls POST /api/payment/create-order, then opens Razorpay checkout.
- * Falls back to demo modal if backend is not connected.
- *
- * @param {Object} formData - The booking form data
- */
 async function initiatePayment(formData) {
   const { plan, amount } = bookingState;
   const btn = bookingState.payBtn;
@@ -878,87 +879,43 @@ async function initiatePayment(formData) {
   if (btn) setButtonLoading(btn, true);
 
   try {
-    // ---- Step 1: Create order on backend ----
-    const orderResponse = await fetch(`${API_BASE_URL}/payment/create-order`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({
-        amount,
-        plan,
-        bookingId: bookingState.bookingId,
-      }),
-    });
+    const upiId = '7999464526@ybl';
+    const amountRupees = amount / 100;
+    const upiLink = `upi://pay?pa=${upiId}&pn=Astronadi&am=${amountRupees}&cu=INR`;
 
-    const orderData = await orderResponse.json();
-    if (!orderResponse.ok) throw new Error(orderData.message || 'Order creation failed.');
+    // Populate UPI Modal details
+    const planNameEl = document.getElementById('upi-plan-name');
+    const amountValEl = document.getElementById('upi-amount-val');
+    const qrCodeImg = document.getElementById('upi-qr-code');
+    const launchUpiBtn = document.getElementById('btnLaunchUPI');
 
-    bookingState.orderId = orderData.orderId;
+    if (planNameEl) planNameEl.textContent = plan;
+    if (amountValEl) amountValEl.textContent = `₹${amountRupees.toLocaleString('en-IN')}`;
 
-    // If backend is operating in DEMO mode, skip Razorpay SDK and open the demo modal directly
-    if (orderData.mode === 'demo') {
-      if (btn) setButtonLoading(btn, false, originalText);
-      showDemoPaymentModal(formData);
-      return;
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      if (launchUpiBtn) {
+        launchUpiBtn.href = upiLink;
+        launchUpiBtn.style.display = 'inline-flex';
+      }
+      // Auto redirect on mobile device to deep link
+      window.location.href = upiLink;
+    } else {
+      if (qrCodeImg) {
+        qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+      }
     }
 
-    // ---- Step 2: Open Razorpay Checkout ----
-    const options = {
-      key:         RAZORPAY_KEY_ID,  // Add your Razorpay Key ID Here
-      amount:      amount,
-      currency:    'INR',
-      name:        'AstroGuide',
-      description: `${plan} — ${formData.consultationDate} ${formData.timeSlot}`,
-      order_id:    orderData.orderId,
-      image:       '🔮',
-
-      prefill: {
-        name:    formData.fullName,
-        email:   formData.email,
-        contact: formData.mobile,
-      },
-
-      notes: {
-        bookingId:        bookingState.bookingId,
-        plan:             plan,
-        consultationDate: formData.consultationDate,
-      },
-
-      theme: { color: '#f6c90e' },  // Gold theme matching AstroGuide
-
-      // ---- Step 3: Payment Success Handler ----
-      handler: async (response) => {
-        if (btn) setButtonLoading(btn, false, originalText);
-        await verifyPayment(response, formData);
-      },
-
-      modal: {
-        ondismiss: () => {
-          if (btn) setButtonLoading(btn, false, originalText);
-          showToast('Payment cancelled. You can try again anytime.', 'info');
-        },
-      },
-    };
-
-    // Open Razorpay
-    const rzp = new Razorpay(options);
-    rzp.on('payment.failed', (response) => {
-      console.error('Payment failed:', response.error);
-      showToast(`❌ Payment failed: ${response.error.description}`, 'error');
-      if (btn) setButtonLoading(btn, false, originalText);
-    });
-    rzp.open();
+    if (btn) setButtonLoading(btn, false, originalText);
+    
+    // Open the UPI Modal
+    showModal('upiModal');
 
   } catch (error) {
     console.error('Payment initiation error:', error);
-
-    // Demo mode — backend not connected
-    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-      if (btn) setButtonLoading(btn, false, originalText);
-      showDemoPaymentModal(formData);
-    } else {
-      showToast(`❌ ${error.message}`, 'error');
-      if (btn) setButtonLoading(btn, false, originalText);
-    }
+    showToast('❌ Failed to initiate UPI payment. Please try again.', 'error');
+    if (btn) setButtonLoading(btn, false, originalText);
   }
 }
 
@@ -998,6 +955,12 @@ async function verifyPayment(razorpayResponse, formData) {
         consultationDate: formatDate(formData.consultationDate),
       };
       showReceipt(receiptData);
+
+      // Auto redirect to WhatsApp with prefilled details
+      setTimeout(() => {
+        triggerWhatsAppRedirect(formData);
+      }, 1000); // 1s delay to let the receipt modal render first smoothly
+      
     } else {
       showToast('⚠️ Payment verification failed. Please contact support.', 'error');
     }
@@ -1015,87 +978,37 @@ async function verifyPayment(razorpayResponse, formData) {
       consultationDate: formatDate(formData.consultationDate),
     };
     showReceipt(receiptData);
+
+    // Auto redirect to WhatsApp with prefilled details
+    setTimeout(() => {
+      triggerWhatsAppRedirect(formData);
+    }, 1000); // 1s delay to let the receipt modal render first smoothly
   }
 }
 
 /**
- * Shows a demo payment modal when the backend is not connected.
- * Simulates the Razorpay checkout for testing/demo purposes.
+ * Automatically opens WhatsApp with prefilled booking details.
  */
-function showDemoPaymentModal(formData) {
-  const amountRupees = (bookingState.amount / 100).toLocaleString('en-IN');
+function triggerWhatsAppRedirect(formData) {
+  const merchantWhatsApp = '917999464526'; // The merchant's WhatsApp number to receive booking details
+  
+  const amountFormatted = `₹${(bookingState.amount / 100).toLocaleString('en-IN')}`;
+  const dateFormatted = formatDate(formData.consultationDate);
+  
+  const msg = `New Booking / Payment Received\n\n` +
+              `Name: ${formData.fullName}\n` +
+              `Mobile: ${formData.mobile}\n` +
+              `Service / Course: ${bookingState.plan}\n` +
+              `Amount: ${amountFormatted}\n` +
+              `Date: ${dateFormatted}\n` +
+              `Time Slot: ${formData.timeSlot}\n` +
+              `Address: ${formData.address}\n` +
+              `Payment Status: Successful`;
 
-  const demoOverlay = document.createElement('div');
-  demoOverlay.className = 'modal-overlay is-active';
-  demoOverlay.style.zIndex = '20000';
-  demoOverlay.id = 'demoPaymentOverlay';
-
-  demoOverlay.innerHTML = `
-    <div style="background:#141438;border:1px solid rgba(246,201,14,0.3);border-radius:24px;padding:36px;max-width:440px;width:100%;text-align:center;box-shadow:0 0 60px rgba(246,201,14,0.15);margin:auto;animation:scaleIn 0.35s ease;">
-      <div style="font-size:3rem;margin-bottom:12px;">🔮</div>
-      <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;color:#f6c90e;margin-bottom:6px;">AstroGuide Payment</h3>
-      <p style="color:#a89ec9;font-size:0.85rem;margin-bottom:20px;">Demo Mode — Backend in development</p>
-
-      <div style="background:rgba(246,201,14,0.05);border:1px solid rgba(246,201,14,0.15);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left;">
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-          <span style="color:#a89ec9;font-size:0.82rem;">Plan</span>
-          <span style="color:#f1f0ff;font-size:0.85rem;font-weight:600;">${bookingState.plan}</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-          <span style="color:#a89ec9;font-size:0.82rem;">Date</span>
-          <span style="color:#f1f0ff;font-size:0.85rem;font-weight:600;">${formData.consultationDate}</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-          <span style="color:#a89ec9;font-size:0.82rem;">Time Slot</span>
-          <span style="color:#f1f0ff;font-size:0.85rem;font-weight:600;">${formData.timeSlot}</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;">
-          <span style="color:#a89ec9;font-size:0.85rem;font-weight:700;">Amount</span>
-          <span style="color:#f6c90e;font-size:1.4rem;font-family:'Cinzel',serif;font-weight:700;">₹${amountRupees}</span>
-        </div>
-      </div>
-
-      <p style="color:#5a5770;font-size:0.78rem;margin-bottom:20px;">
-        ⚡ Connect the backend and add your Razorpay Key to enable live payments.
-      </p>
-
-      <div style="display:flex;gap:12px;">
-        <button id="demoProceedBtn" style="flex:1;padding:14px;background:linear-gradient(135deg,#f6c90e,#b7791f);border:none;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;color:#1a0a00;font-family:inherit;">
-          ✅ Simulate Success
-        </button>
-        <button id="demoCancelBtn" style="flex:1;padding:14px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:50px;font-weight:600;font-size:0.95rem;cursor:pointer;color:#a89ec9;font-family:inherit;">
-          Cancel
-        </button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(demoOverlay);
-
-  // Simulate Success
-  document.getElementById('demoProceedBtn').addEventListener('click', async () => {
-    document.body.removeChild(demoOverlay);
-    const fakePaymentId = `pay_DEMO_${Date.now()}`;
-    const fakeOrderId   = bookingState.orderId || `order_DEMO_${Date.now()}`;
-
-    const btn = bookingState.payBtn;
-    const originalText = btn?.textContent || 'Proceed to Secure Payment';
-    if (btn) setButtonLoading(btn, true);
-
-    await verifyPayment({
-      razorpay_payment_id: fakePaymentId,
-      razorpay_order_id:   fakeOrderId,
-      razorpay_signature:  'demo_signature',
-    }, formData);
-
-    if (btn) setButtonLoading(btn, false, originalText);
-  });
-
-  // Cancel
-  document.getElementById('demoCancelBtn').addEventListener('click', () => {
-    document.body.removeChild(demoOverlay);
-    showToast('Payment cancelled. Try again anytime.', 'info');
-  });
+  const url = `https://wa.me/${merchantWhatsApp}?text=${encodeURIComponent(msg)}`;
+  
+  // Open in a new tab
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 /* =====================================================================
@@ -1126,6 +1039,52 @@ function initReceiptModal() {
   });
 }
 
+/** ---- 16b. initUPIModal — Bind UPI modal actions ------------------- */
+function initUPIModal() {
+  // Close button
+  document.getElementById('upiModalClose')?.addEventListener('click', () => {
+    closeModal('upiModal');
+  });
+
+  // Close on backdrop click
+  document.getElementById('upiModal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'upiModal') {
+      closeModal('upiModal');
+    }
+  });
+
+  // Copy UPI ID button
+  document.getElementById('btnCopyUPI')?.addEventListener('click', () => {
+    const upiId = document.getElementById('upi-id-string')?.textContent || '7999464526@ybl';
+    navigator.clipboard.writeText(upiId).then(() => {
+      showToast('📋 UPI ID copied to clipboard!', 'success');
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+      showToast('❌ Copy failed. Please type manually.', 'error');
+    });
+  });
+
+  // Confirm Paid button
+  document.getElementById('upiConfirmPaidBtn')?.addEventListener('click', async () => {
+    const confirmBtn = document.getElementById('upiConfirmPaidBtn');
+    setButtonLoading(confirmBtn, true, 'Confirming...');
+    try {
+      const mockResponse = {
+        razorpay_order_id: `order_UPI_DEMO_${Date.now()}`,
+        razorpay_payment_id: `pay_UPI_${Date.now()}`,
+        razorpay_signature: 'demo_signature',
+      };
+      await verifyPayment(mockResponse, bookingState.formData);
+      closeModal('upiModal');
+    } catch (error) {
+      console.error('Verify error:', error);
+      showToast('❌ Verification failed. Please try again.', 'error');
+    } finally {
+      setButtonLoading(confirmBtn, false, '✅ Confirm Payment & Book Slot');
+    }
+  });
+}
+
 /**
  * Opens WhatsApp with the beautifully formatted receipt message.
  */
@@ -1141,7 +1100,7 @@ function sendWhatsAppReceipt() {
   const sessionDate  = document.getElementById('r-consultationDate')?.textContent || '—';
   const timeSlot     = document.getElementById('r-timeSlot')?.textContent || '—';
 
-  const message = `🔮 *ASTROGUIDE CONSULTATION RECEIPT* 🔮\n` +
+  const message = `🔮 *ASTRONADI CONSULTATION RECEIPT* 🔮\n` +
                   `---------------------------------------\n` +
                   `*Receipt No:* ${receiptNo}\n` +
                   `*Transaction ID:* ${paymentId}\n` +
@@ -1155,7 +1114,7 @@ function sendWhatsAppReceipt() {
                   `*Time Slot:* ${timeSlot}\n` +
                   `*Status:* ✅ Payment Successful\n` +
                   `---------------------------------------\n` +
-                  `_Thank you for choosing AstroGuide! Our astrologer will contact you soon on your registered number._`;
+                  `_Thank you for choosing Astronadi! Our astrologer will contact you soon on your registered number._`;
 
   const encodedMessage = encodeURIComponent(message);
   const cleanMobile = mobile.replace(/[^0-9]/g, '');
@@ -1230,7 +1189,7 @@ async function downloadReceiptAsPDF() {
 
     const receiptNo  = document.getElementById('r-receiptNo')?.textContent || 'Receipt';
     const customerName = document.getElementById('r-name')?.textContent || 'Customer';
-    const filename   = `AstroGuide_Receipt_${receiptNo}.pdf`;
+    const filename   = `Astronadi_Receipt_${receiptNo}.pdf`;
 
     const opt = {
       margin:       [10, 10, 10, 10],
@@ -1450,6 +1409,11 @@ document.addEventListener('keydown', (e) => {
       closeModal('bookingModal');
     }
 
+    // Close UPI modal on Escape
+    if (document.getElementById('upiModal')?.classList.contains('is-active')) {
+      closeModal('upiModal');
+    }
+
     // Close receipt modal on Escape
     if (document.getElementById('receiptModal')?.classList.contains('is-active')) {
       closeModal('receiptModal');
@@ -1494,4 +1458,30 @@ function generateLocalReceiptNum() {
   const date   = new Date().toISOString().slice(0, 10).replace(/-/g, '');
   const random = Math.random().toString(36).substr(2, 6).toUpperCase();
   return `RCP-${date}-${random}`;
+}
+
+/**
+ * Dynamically updates a service card's book button based on the selected dropdown option.
+ * Used for services with multiple pricing tiers (e.g. Kundli Reading, Vastu).
+ * 
+ * @param {HTMLSelectElement} selectEl - The dropdown select element
+ */
+function updateServicePrice(selectEl) {
+  if (!selectEl) return;
+  const selectedOption = selectEl.options[selectEl.selectedIndex];
+  if (!selectedOption) return;
+
+  const plan = selectedOption.value;
+  const amount = selectedOption.getAttribute('data-amount');
+  const price = selectedOption.getAttribute('data-price');
+
+  // Find the pay button in the same card
+  const card = selectEl.closest('.service-card');
+  const btn = card?.querySelector('.pay-btn');
+
+  if (btn) {
+    btn.setAttribute('data-plan', plan);
+    btn.setAttribute('data-amount', amount);
+    btn.textContent = `✨ Book Now — ₹${price}`;
+  }
 }

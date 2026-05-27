@@ -30,6 +30,16 @@ const VALID_PLANS = [
   'Basic Consultation',
   'Detailed Kundli Reading',
   'Premium Consultation',
+  'Single Question Consultation',
+  'Online Full Kundli Consultation',
+  'Offline Consultation',
+  'KP Astrology Course',
+  'Ancient Mystical Protocols & Divine Yantras',
+  'Online Vastu Consultation',
+  'Offline Vastu Visit',
+  'Nadi Jyotish Consultation',
+  'Name Numerology',
+  'Tarot Card Reading',
 ];
 
 const VALID_CONSULTATION_TYPES = [
@@ -39,6 +49,10 @@ const VALID_CONSULTATION_TYPES = [
   'Vastu Consultation',
   'Daily Horoscope',
   'Name Numerology',
+  'KP Astrology Course',
+  'Ancient Mystical Protocols & Divine Yantras',
+  'Nadi Jyotish Consultation',
+  'Tarot Card Reading',
 ];
 
 // =====================================================

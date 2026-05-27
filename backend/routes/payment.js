@@ -49,9 +49,19 @@ function getReceiptRouter() { return require('./receipt');       }
 
 // ---- Allowed plans + server-side amount verification ----
 const PLAN_AMOUNTS = {
-  'Basic Consultation':      19900,  // ₹199
-  'Detailed Kundli Reading': 49900,  // ₹499
-  'Premium Consultation':    99900,  // ₹999
+  'Basic Consultation':                          19900,   // ₹199
+  'Detailed Kundli Reading':                     49900,   // ₹499
+  'Premium Consultation':                        99900,   // ₹999
+  'Single Question Consultation':                49900,   // ₹499
+  'Online Full Kundli Consultation':             110000,  // ₹1100
+  'Offline Consultation':                        210000,  // ₹2100
+  'KP Astrology Course':                         1400000, // ₹14000
+  'Ancient Mystical Protocols & Divine Yantras': 500000,  // ₹5000
+  'Online Vastu Consultation':                   250000,  // ₹2500
+  'Offline Vastu Visit':                         700000,  // ₹7000
+  'Nadi Jyotish Consultation':                   2100000, // ₹21000
+  'Name Numerology':                             210000,  // ₹2100
+  'Tarot Card Reading':                          49900,   // ₹499
 };
 
 // ---- In-memory orders store ----
