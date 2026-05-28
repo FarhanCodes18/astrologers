@@ -6,50 +6,50 @@
 
 /* ===================== CSS VARIABLES ===================== */
 :root {
-  /* Colors - Dark Cosmic Palette */
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #0f0f2e;
-  --bg-tertiary: #141438;
-  --bg-card: #12122e;
-  --bg-glass: rgba(255, 255, 255, 0.04);
-  --bg-glass-hover: rgba(255, 255, 255, 0.08);
+  /* Colors - Premium Dark Purple + Lavender Glow Palette */
+  --bg-primary: #0a0416; /* Deep dark purple space background */
+  --bg-secondary: #130925; /* Dark violet-purple */
+  --bg-tertiary: #1b0e35; /* Cosmic purple background */
+  --bg-card: rgba(19, 9, 37, 0.7); /* Deep purple transparent card background */
+  --bg-glass: rgba(19, 9, 37, 0.6); /* Glassmorphic card back on dark bg */
+  --bg-glass-hover: rgba(30, 15, 58, 0.85);
 
   /* Purple Spectrum */
-  --purple-deep: #1a0a3e;
-  --purple-mid: #2d1b69;
-  --purple-light: #6b46c1;
-  --purple-glow: rgba(107, 70, 193, 0.3);
+  --purple-deep: #0a0416; /* Deep luxury purple */
+  --purple-mid: #8a57e6;  /* Vivid violet purple */
+  --purple-light: #b388ff; /* Soft lavender glow */
+  --purple-glow: rgba(179, 136, 255, 0.15);
 
-  /* Gold Accent System */
-  --gold-primary: #f6c90e;
-  --gold-secondary: #e8a317;
-  --gold-light: #fde68a;
-  --gold-dark: #b7791f;
-  --gold-glow: rgba(246, 201, 14, 0.2);
+  /* Gold Accent System - Premium Soft Gold */
+  --gold-primary: #d4af37; /* Luxury metallic gold */
+  --gold-secondary: #f6c90e;
+  --gold-light: #ffeb99;
+  --gold-dark: #8c6d1f;
+  --gold-glow: rgba(212, 175, 55, 0.25);
 
   /* Text Colors */
-  --text-primary: #f1f0ff;
-  --text-secondary: #a89ec9;
-  --text-muted: #6b6888;
-  --text-gold: #f6c90e;
+  --text-primary: #f5f0ff; /* Off-white with purple tint, highly readable on dark bg */
+  --text-secondary: #c5b2e5; /* Soft elegant lavender-gray */
+  --text-muted: #8b7ca3; /* Muted lavender-gray */
+  --text-gold: #ffd700;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #0a0a1a 0%, #1a0a3e 40%, #0f0f2e 100%);
-  --gradient-gold: linear-gradient(135deg, #f6c90e 0%, #e8a317 50%, #b7791f 100%);
-  --gradient-purple: linear-gradient(135deg, #6b46c1 0%, #2d1b69 100%);
-  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-  --gradient-cosmic: linear-gradient(180deg, #0a0a1a 0%, #1a0a3e 50%, #0a0a1a 100%);
+  --gradient-hero: linear-gradient(135deg, #13072e 0%, #070314 50%, #1c0529 100%); /* Deep dark cosmic space */
+  --gradient-gold: linear-gradient(135deg, #f6c90e 0%, #d4af37 50%, #99781a 100%);
+  --gradient-purple: linear-gradient(135deg, #b388ff 0%, #5e3b9b 100%);
+  --gradient-card: linear-gradient(145deg, rgba(27, 14, 53, 0.8) 0%, rgba(13, 6, 26, 0.8) 100%);
+  --gradient-cosmic: linear-gradient(180deg, #0a0416 0%, #130925 50%, #1b0e35 100%);
 
   /* Borders */
-  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
-  --border-gold: 1px solid rgba(246, 201, 14, 0.3);
-  --border-purple: 1px solid rgba(107, 70, 193, 0.3);
+  --border-glass: 1px solid rgba(179, 136, 255, 0.18);
+  --border-gold: 1px solid rgba(212, 175, 55, 0.45);
+  --border-purple: 1px solid rgba(179, 136, 255, 0.25);
 
   /* Shadows */
   --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 0 30px rgba(246, 201, 14, 0.15);
-  --shadow-purple: 0 0 40px rgba(107, 70, 193, 0.2);
+  --shadow-gold: 0 0 30px rgba(212, 175, 55, 0.25);
+  --shadow-purple: 0 0 40px rgba(179, 136, 255, 0.15);
   --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.4);
 
   /* Typography */
@@ -177,13 +177,20 @@ input, textarea, select { font-family: inherit; }
 /* Gold Button */
 .btn-gold {
   background: var(--gradient-gold);
-  color: #1a0a00;
-  box-shadow: var(--shadow-gold), 0 4px 15px rgba(246, 201, 14, 0.25);
+  color: #1a0933;
+  box-shadow: var(--shadow-gold), 0 4px 15px rgba(212, 175, 55, 0.2);
+  animation: button-glow 3s infinite alternate;
+}
+
+@keyframes button-glow {
+  0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), 0 4px 15px rgba(212, 175, 55, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.5), 0 4px 20px rgba(212, 175, 55, 0.25); }
+  100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), 0 4px 15px rgba(212, 175, 55, 0.15); }
 }
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 50px rgba(246, 201, 14, 0.35), 0 8px 25px rgba(246, 201, 14, 0.3);
+  box-shadow: 0 0 50px rgba(212, 175, 55, 0.4), 0 8px 25px rgba(212, 175, 55, 0.3);
   filter: brightness(1.05);
 }
 
@@ -193,16 +200,16 @@ input, textarea, select { font-family: inherit; }
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(94, 59, 155, 0.25);
   backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
-  background: rgba(246, 201, 14, 0.05);
+  border-color: var(--purple-light);
+  color: var(--purple-deep);
+  background: rgba(142, 98, 217, 0.06);
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(246, 201, 14, 0.1);
+  box-shadow: 0 0 20px rgba(142, 98, 217, 0.1);
 }
 
 /* WhatsApp Button */
@@ -275,11 +282,11 @@ input, textarea, select { font-family: inherit; }
 }
 
 .navbar.scrolled {
-  background: rgba(10, 10, 26, 0.92);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(246, 201, 14, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border-bottom: var(--border-glass);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-container {
@@ -294,19 +301,48 @@ input, textarea, select { font-family: inherit; }
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-shrink: 0;
 }
 
+.logo-frame {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--bg-tertiary);
+  box-shadow: 0 0 12px var(--gold-glow), 0 0 8px rgba(142, 98, 217, 0.15);
+  transition: var(--transition-mid);
+  cursor: pointer;
+}
+
+.logo-frame:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px var(--gold-glow), 0 0 12px rgba(142, 98, 217, 0.3);
+  border-color: var(--gold-light);
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .logo-icon {
-  font-size: 1.6rem;
-  filter: drop-shadow(0 0 10px rgba(246, 201, 14, 0.5));
+  font-size: 1.55rem;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
 .logo-text {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: 1px;
@@ -380,10 +416,10 @@ input, textarea, select { font-family: inherit; }
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(10, 10, 30, 0.98);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(246, 201, 14, 0.1);
-  padding: 20px;
+  border-bottom: var(--border-glass);
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -391,6 +427,7 @@ input, textarea, select { font-family: inherit; }
   opacity: 0;
   pointer-events: none;
   transition: var(--transition-mid);
+  box-shadow: var(--shadow-md);
 }
 
 .mobile-menu.open {
@@ -398,6 +435,31 @@ input, textarea, select { font-family: inherit; }
   opacity: 1;
   pointer-events: all;
 }
+
+.mobile-menu .mobile-link,
+.mobile-menu .btn,
+.mobile-menu .mobile-menu-header {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu.open .mobile-link,
+.mobile-menu.open .btn,
+.mobile-menu.open .mobile-menu-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu.open .mobile-menu-header { transition-delay: 0.02s; }
+.mobile-menu.open .mobile-link:nth-child(2) { transition-delay: 0.06s; }
+.mobile-menu.open .mobile-link:nth-child(3) { transition-delay: 0.1s; }
+.mobile-menu.open .mobile-link:nth-child(4) { transition-delay: 0.14s; }
+.mobile-menu.open .mobile-link:nth-child(5) { transition-delay: 0.18s; }
+.mobile-menu.open .mobile-link:nth-child(6) { transition-delay: 0.22s; }
+.mobile-menu.open .mobile-link:nth-child(7) { transition-delay: 0.26s; }
+.mobile-menu.open .mobile-link:nth-child(8) { transition-delay: 0.3s; }
+.mobile-menu.open .btn { transition-delay: 0.34s; }
 
 .mobile-link {
   padding: 14px 20px;
@@ -440,21 +502,21 @@ input, textarea, select { font-family: inherit; }
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 50% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 45% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(2px 2px at 5% 55%, rgba(246,201,14,0.4) 0%, transparent 100%),
-    radial-gradient(2px 2px at 85% 30%, rgba(246,201,14,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 35% 5%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 75% 95%, rgba(255,255,255,0.3) 0%, transparent 100%);
+    radial-gradient(1px 1px at 10% 20%, rgba(142, 98, 217, 0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 60%, rgba(212, 175, 55, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 30%, rgba(142, 98, 217, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 80%, rgba(212, 175, 55, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 15%, rgba(142, 98, 217, 0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 85%, rgba(212, 175, 55, 0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 10%, rgba(142, 98, 217, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 50%, rgba(142, 98, 217, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, rgba(212, 175, 55, 0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 70%, rgba(142, 98, 217, 0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 5% 55%, rgba(212, 175, 55, 0.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 85% 30%, rgba(212, 175, 55, 0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 90%, rgba(142, 98, 217, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 5%, rgba(142, 98, 217, 0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 95%, rgba(212, 175, 55, 0.2) 0%, transparent 100%);
 }
 
 .layer-1 { animation: twinkle 4s ease-in-out infinite; }
@@ -962,8 +1024,8 @@ input, textarea, select { font-family: inherit; }
 .form-group textarea {
   width: 100%;
   padding: 14px 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg-glass);
+  border: var(--border-glass);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-size: 0.95rem;
@@ -975,9 +1037,9 @@ input, textarea, select { font-family: inherit; }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--gold-primary);
-  background: rgba(246, 201, 14, 0.04);
-  box-shadow: 0 0 0 3px rgba(246, 201, 14, 0.1);
+  border-color: var(--purple-light);
+  background: var(--bg-glass-hover);
+  box-shadow: 0 0 0 3px var(--purple-glow);
 }
 
 .form-group input::placeholder,
@@ -1836,7 +1898,7 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 20, 0.88);
+  background: rgba(31, 11, 64, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 10000;
@@ -1854,14 +1916,15 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 
 /* ---- Modal Container (shared) -------------------------------------- */
 .modal-container {
-  background: linear-gradient(160deg, #0f0f2a 0%, #12103a 100%);
-  border: 1px solid rgba(246, 201, 14, 0.2);
+  background: linear-gradient(160deg, #130925 0%, #0a0416 100%);
+  border: 1px solid rgba(179, 136, 255, 0.2);
   border-radius: var(--radius-xl);
   width: 100%;
-  box-shadow: 0 0 80px rgba(107, 70, 193, 0.25), 0 30px 60px rgba(0,0,0,0.6);
+  box-shadow: 0 0 80px rgba(179, 136, 255, 0.15), 0 30px 60px rgba(13, 6, 26, 0.5);
   position: relative;
   margin: auto;
   animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--text-primary);
 }
 
 /* ---- Booking Modal ------------------------------------------------- */
@@ -1935,13 +1998,13 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   align-items: center;
   gap: 16px;
   padding: 16px 36px;
-  background: rgba(246, 201, 14, 0.06);
-  border-bottom: 1px solid rgba(246, 201, 14, 0.12);
+  background: rgba(142, 98, 217, 0.05);
+  border-bottom: 1px solid rgba(142, 98, 217, 0.1);
 }
 
 .plan-strip-icon {
   font-size: 1.8rem;
-  filter: drop-shadow(0 0 8px rgba(246, 201, 14, 0.4));
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
 }
 
 .plan-strip-info { flex: 1; }
@@ -1964,7 +2027,7 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--gold-primary);
-  text-shadow: 0 0 20px rgba(246, 201, 14, 0.4);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
 }
 
 /* Booking Form */
@@ -1976,8 +2039,8 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 .form-group select {
   width: 100%;
   padding: 14px 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(30, 15, 58, 0.5);
+  border: 1px solid rgba(179, 136, 255, 0.2);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-size: 0.95rem;
@@ -1987,20 +2050,20 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a89ec9'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b388ff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 20px;
 }
 
 .form-group select:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 0 3px rgba(246, 201, 14, 0.1);
-  background-color: rgba(255,255,255,0.07);
+  border-color: var(--purple-light);
+  box-shadow: 0 0 0 3px rgba(179, 136, 255, 0.15);
+  background-color: rgba(45, 22, 87, 0.7);
 }
 
 .form-group select option {
-  background: #12103a;
+  background: #130925;
   color: var(--text-primary);
 }
 
@@ -2066,9 +2129,9 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 /* Individual slot button */
 .slot-btn {
   padding: 12px 8px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(179, 136, 255, 0.15);
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,0.03);
+  background: rgba(30, 15, 58, 0.5);
   color: var(--text-secondary);
   font-size: 0.78rem;
   font-weight: 500;
@@ -2085,27 +2148,27 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 
 /* Available slot */
 .slot-btn.slot-available:hover {
-  border-color: rgba(246, 201, 14, 0.4);
-  background: rgba(246, 201, 14, 0.06);
-  color: var(--gold-light);
+  border-color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--text-primary);
   transform: translateY(-2px);
 }
 
 /* Selected slot */
 .slot-btn.slot-selected {
   border-color: var(--gold-primary);
-  background: rgba(246, 201, 14, 0.12);
-  color: var(--gold-primary);
-  box-shadow: 0 0 16px rgba(246, 201, 14, 0.2);
+  background: rgba(212, 175, 55, 0.25);
+  color: var(--text-primary);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
   font-weight: 600;
   transform: translateY(-2px);
 }
 
 /* Booked / disabled slot */
 .slot-btn.slot-booked {
-  border-color: rgba(239, 68, 68, 0.2);
-  background: rgba(239, 68, 68, 0.04);
-  color: rgba(255,255,255,0.25);
+  border-color: rgba(239, 68, 68, 0.15);
+  background: rgba(239, 68, 68, 0.02);
+  color: rgba(255, 255, 255, 0.25);
   cursor: not-allowed;
   opacity: 0.55;
   text-decoration: line-through;
@@ -2122,18 +2185,18 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 }
 
 .slot-btn.slot-available .slot-badge {
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
 }
 
 .slot-btn.slot-selected .slot-badge {
-  background: rgba(246, 201, 14, 0.2);
-  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--purple-deep);
 }
 
 .slot-btn.slot-booked .slot-badge {
   background: rgba(239, 68, 68, 0.1);
-  color: #f87171;
+  color: #dc2626;
 }
 
 /* Booking security note */
@@ -2158,8 +2221,8 @@ a.contact-item-value:hover { color: var(--gold-primary); }
 .upi-details-strip {
   display: flex;
   justify-content: space-between;
-  background: rgba(246, 201, 14, 0.05);
-  border: 1px solid rgba(246, 201, 14, 0.15);
+  background: rgba(142, 98, 217, 0.05);
+  border: 1px solid rgba(142, 98, 217, 0.15);
   border-radius: var(--radius-md);
   padding: 16px 20px;
   margin-bottom: 24px;
@@ -2249,8 +2312,8 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(142, 98, 217, 0.05);
+  border: 1px solid rgba(142, 98, 217, 0.15);
   padding: 10px 16px;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
@@ -2560,11 +2623,11 @@ body::before {
   inset: 0;
   z-index: -1;
   background-image: 
-    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.15) 0%, transparent 100%),
-    radial-gradient(2px 2px at 40px 70px, rgba(246, 201, 14, 0.15) 0%, transparent 100%),
-    radial-gradient(3px 3px at 120px 150px, rgba(107, 70, 193, 0.15) 0%, transparent 100%),
-    radial-gradient(2px 2px at 250px 80px, rgba(255, 255, 255, 0.1) 0%, transparent 100%),
-    radial-gradient(2px 2px at 300px 320px, rgba(246, 201, 14, 0.1) 0%, transparent 100%);
+    radial-gradient(2px 2px at 20px 30px, rgba(94, 59, 155, 0.12) 0%, transparent 100%),
+    radial-gradient(2px 2px at 40px 70px, rgba(212, 175, 55, 0.12) 0%, transparent 100%),
+    radial-gradient(3px 3px at 120px 150px, rgba(186, 104, 200, 0.15) 0%, transparent 100%),
+    radial-gradient(2px 2px at 250px 80px, rgba(94, 59, 155, 0.08) 0%, transparent 100%),
+    radial-gradient(2px 2px at 300px 320px, rgba(212, 175, 55, 0.08) 0%, transparent 100%);
   background-repeat: repeat;
   background-size: 400px 400px;
   animation: float-particles 60s linear infinite;
@@ -3230,4 +3293,209 @@ body::before {
   content-visibility: auto;
   contain-intrinsic-size: 1px 800px;
 }
+
+/* =====================================================================
+   THEME STYLE OVERRIDES (5 THEMES: Purple, White, Orange, Red, Blue)
+   ===================================================================== */
+
+/* 1. Purple Theme is default (defined in :root) */
+
+/* 2. White (Light) Theme */
+[data-theme="white"] {
+  --bg-primary: #fbf9fe; /* Soft off-white with lavender tint */
+  --bg-secondary: #f4ecff; /* Soft lavender */
+  --bg-tertiary: #ebdfff; /* Slightly deeper lavender */
+  --bg-card: rgba(255, 255, 255, 0.85); /* Translucent white card */
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-hover: rgba(255, 255, 255, 0.9);
+  --purple-deep: #1f0b40;
+  --purple-mid: #5e3b9b;
+  --purple-light: #8e62d9;
+  --purple-glow: rgba(142, 98, 217, 0.12);
+  --gold-primary: #c59b27;
+  --gold-secondary: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-glow: rgba(212, 175, 55, 0.15);
+  --text-primary: #1e0f35; /* Dark navy text */
+  --text-secondary: #584a75;
+  --text-muted: #8b7d9d;
+  --text-gold: #c59b27;
+  --gradient-hero: linear-gradient(135deg, #fbf8fe 0%, #f4ecff 45%, #fff2f6 100%);
+  --gradient-purple: linear-gradient(135deg, #8e62d9 0%, #5e3b9b 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
+  --gradient-cosmic: linear-gradient(180deg, #fbf9fe 0%, #f4ecff 50%, #fff2f6 100%);
+  --border-glass: 1px solid rgba(142, 98, 217, 0.15);
+  --border-purple: 1px solid rgba(142, 98, 217, 0.25);
+  --shadow-sm: 0 4px 20px rgba(107, 70, 193, 0.08);
+  --shadow-md: 0 8px 40px rgba(107, 70, 193, 0.12);
+}
+
+/* 3. Orange Theme */
+[data-theme="orange"] {
+  --bg-primary: #0f0500;
+  --bg-secondary: #1e0b00;
+  --bg-tertiary: #2e1200;
+  --bg-card: rgba(30, 11, 0, 0.7);
+  --bg-glass: rgba(30, 11, 0, 0.6);
+  --bg-glass-hover: rgba(46, 18, 0, 0.85);
+  --purple-deep: #0f0500;
+  --purple-mid: #d35400;
+  --purple-light: #e67e22;
+  --purple-glow: rgba(230, 126, 34, 0.15);
+  --gold-primary: #f39c12;
+  --gold-secondary: #e67e22;
+  --gold-light: #fbe5c8;
+  --gold-glow: rgba(243, 156, 18, 0.25);
+  --text-primary: #fff5eb;
+  --text-secondary: #fcd5b8;
+  --text-muted: #cda283;
+  --text-gold: #ff9f43;
+  --gradient-hero: linear-gradient(135deg, #240d00 0%, #0c0400 50%, #290800 100%);
+  --gradient-purple: linear-gradient(135deg, #e67e22 0%, #a04000 100%);
+  --gradient-card: linear-gradient(145deg, rgba(46, 18, 0, 0.8) 0%, rgba(20, 8, 0, 0.8) 100%);
+  --gradient-cosmic: linear-gradient(180deg, #0f0500 0%, #1e0b00 50%, #2e1200 100%);
+  --border-glass: 1px solid rgba(230, 126, 34, 0.18);
+  --border-purple: 1px solid rgba(230, 126, 34, 0.25);
+}
+
+/* 4. Red Theme */
+[data-theme="red"] {
+  --bg-primary: #120002;
+  --bg-secondary: #240005;
+  --bg-tertiary: #3a000a;
+  --bg-card: rgba(36, 0, 5, 0.7);
+  --bg-glass: rgba(36, 0, 5, 0.6);
+  --bg-glass-hover: rgba(58, 0, 10, 0.85);
+  --purple-deep: #120002;
+  --purple-mid: #c0392b;
+  --purple-light: #e74c3c;
+  --purple-glow: rgba(231, 76, 60, 0.15);
+  --gold-primary: #d4af37;
+  --gold-secondary: #f39c12;
+  --gold-light: #ffe5aa;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --text-primary: #fff0f2;
+  --text-secondary: #fca8b4;
+  --text-muted: #ca818c;
+  --text-gold: #ff7675;
+  --gradient-hero: linear-gradient(135deg, #2b0007 0%, #0a0001 50%, #30000a 100%);
+  --gradient-purple: linear-gradient(135deg, #e74c3c 0%, #78281f 100%);
+  --gradient-card: linear-gradient(145deg, rgba(58, 0, 10, 0.8) 0%, rgba(20, 0, 3, 0.8) 100%);
+  --gradient-cosmic: linear-gradient(180deg, #120002 0%, #240005 50%, #3a000a 100%);
+  --border-glass: 1px solid rgba(231, 76, 60, 0.18);
+  --border-purple: 1px solid rgba(231, 76, 60, 0.25);
+}
+
+/* 5. Blue Theme */
+[data-theme="blue"] {
+  --bg-primary: #000a1a;
+  --bg-secondary: #001333;
+  --bg-tertiary: #001c4d;
+  --bg-card: rgba(0, 19, 51, 0.7);
+  --bg-glass: rgba(0, 19, 51, 0.6);
+  --bg-glass-hover: rgba(0, 28, 77, 0.85);
+  --purple-deep: #000a1a;
+  --purple-mid: #2980b9;
+  --purple-light: #3498db;
+  --purple-glow: rgba(52, 152, 219, 0.15);
+  --gold-primary: #d4af37;
+  --gold-secondary: #f1c40f;
+  --gold-light: #fef5d1;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --text-primary: #f0f6ff;
+  --text-secondary: #aacbff;
+  --text-muted: #7da0d6;
+  --text-gold: #f39c12;
+  --gradient-hero: linear-gradient(135deg, #001330 0%, #00050d 50%, #001c42 100%);
+  --gradient-purple: linear-gradient(135deg, #3498db 0%, #1a5276 100%);
+  --gradient-card: linear-gradient(145deg, rgba(0, 28, 77, 0.8) 0%, rgba(0, 10, 26, 0.8) 100%);
+  --gradient-cosmic: linear-gradient(180deg, #000a1a 0%, #001333 50%, #001c4d 100%);
+  --border-glass: 1px solid rgba(52, 152, 219, 0.18);
+  --border-purple: 1px solid rgba(52, 152, 219, 0.25);
+}
+
+/* =====================================================================
+   THEME DROPDOWN SWITCHER (NAVBAR POSITION)
+   ===================================================================== */
+.theme-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-trigger-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-glass);
+  border: var(--border-glass);
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.theme-trigger-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+  border-color: var(--purple-light);
+  background: var(--bg-glass-hover);
+}
+
+.theme-options-panel {
+  display: flex;
+  flex-direction: row; /* Horizontal layout! */
+  gap: 8px;
+  background: var(--bg-card);
+  border: var(--border-glass);
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-md);
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-bounce);
+  z-index: 1001;
+}
+
+.theme-dropdown-container.open .theme-options-panel {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.theme-dot-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+  outline: none;
+}
+
+.theme-dot-btn:hover {
+  transform: scale(1.15);
+}
+
+.theme-dot-btn.active {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 10px var(--gold-glow);
+  transform: scale(1.1);
+}
+
+/* Individual Dot Colors representing their themes */
+.theme-purple { background: #8a57e6; }
+.theme-white  { background: #ffffff; border: 2px solid #ccc; }
+.theme-orange { background: #e67e22; }
+.theme-red    { background: #e74c3c; }
+.theme-blue   { background: #3498db; }
+
 

@@ -35,7 +35,9 @@
    1. CONSTANTS & GLOBAL STATE
    ===================================================================== */
 
-const API_BASE_URL = 'https://astrologers.onrender.com/api';
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:5000/api'
+  : 'https://astrologers.onrender.com/api';
 
 // Add your Razorpay Key ID here (matches the one in .env)
 const RAZORPAY_KEY_ID = 'rzp_test_YourRazorpayKeyHere';
@@ -54,26 +56,26 @@ const TIME_SLOTS = [
 
 /** Plan metadata — maps plan name to its display info */
 const PLAN_META = {
-  'Single Question Consultation':                { icon: '📜', duration: '15 Minute Session', price: 499   },
-  'Online Full Kundli Consultation':             { icon: '📜', duration: '45 Minute Session', price: 1100  },
-  'Offline Consultation':                        { icon: '📜', duration: '60 Minute Session', price: 2100  },
-  'KP Astrology Course':                         { icon: '🎓', duration: '12 Week Course',     price: 14000 },
+  'Main Consultation - Single':                  { icon: '🔮', duration: 'Single Question',    price: 499   },
+  'Main Consultation - Full':                    { icon: '🔮', duration: 'Full Consultation',  price: 1100  },
+  'Main Consultation - Premium':                 { icon: '🔮', duration: 'Offline Consultation', price: 2100  },
+  'Reiki & Lama Fera Healing Sessions':          { icon: '🙌', duration: '15 Min Session',     price: 499   },
+  'Vedic Card Reading':                          { icon: '🃏', duration: 'Per Question',       price: 499   },
   'Ancient Mystical Protocols & Divine Yantras': { icon: '🔯', duration: 'Custom energized',   price: 5000  },
   'Online Vastu Consultation':                   { icon: '🏛️', duration: 'Vastu Analysis',     price: 2500  },
   'Offline Vastu Visit':                         { icon: '🏡', duration: 'In-person Visit',    price: 7000  },
   'Nadi Jyotish Consultation':                   { icon: '🔱', duration: 'Palm Leaf Reading',  price: 21000 },
-  'Name Numerology':                             { icon: '🔢', duration: 'Numerology Report',  price: 2100  },
-  'Tarot Card Reading':                          { icon: '🔮', duration: '2 Questions Tarot',  price: 499   },
-  'Face Reading Course':                         { icon: '📖', duration: '6 Week Course',      price: 12000 },
-  'Vedic Astrology Course':                      { icon: '🔯', duration: '16 Week Course',     price: 21000 },
-  'Bhrigu Nandi Nadi Course':                    { icon: '🪐', duration: '8 Week Course',      price: 14000 },
-  'Vedic Numerology Course':                     { icon: '🔢', duration: '6 Week Course',      price: 14000 },
-  'Jamakol Prasannam Course':                    { icon: '🏹', duration: '4 Week Course',      price: 9000  },
-  'Palmistry Course':                            { icon: '✋', duration: '8 Week Course',      price: 14000 },
-  'Meditation Workshop':                         { icon: '🧘', duration: '2 Week Workshop',    price: 2999  },
-  'Lama Fera Healing Course':                    { icon: '🏮', duration: '6 Week Course',      price: 15000 },
-  'Healing Session':                             { icon: '🙌', duration: '30-45 Min Seating',  price: 500   },
+  'Name Numerology':                             { icon: '🔢', duration: 'Name Correction',    price: 2100  },
+  'Tarot Card Reading':                          { icon: '🔮', duration: 'Tarot Reading',      price: 499   },
+  'Face Reading Course':                         { icon: '📖', duration: 'Advance Course',     price: 12000 },
+  'Bhrigu Nandi Nadi Course':                    { icon: '🪐', duration: 'Nadi Course',         price: 14000 },
+  'Vedic Numerology Course':                     { icon: '🔢', duration: 'Numerology Course',  price: 14000 },
+  'Jamakol Prasannam Course':                    { icon: '🏹', duration: 'Jamkol B Course',    price: 9000  },
+  'Palmistry Course':                            { icon: '✋', duration: 'Palmistry Course',   price: 14000 },
+  'Meditation Workshop':                         { icon: '🧘', duration: 'Meditation Workshop', price: 2999  },
+  'Healing Session':                             { icon: '🙌', duration: 'Spiritual Session',  price: 500   },
 };
+
 
 /**
  * BOOKING STATE — Shared across functions.
@@ -95,6 +97,8 @@ let bookingState = {
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initMobileMenu();
+  initLogoUpload();
+  initThemeSwitcher();
   initSmoothScroll();
   initScrollReveal();
   initCounterAnimations();
@@ -1555,3 +1559,139 @@ function initMobileQrPopup() {
     }
   });
 }
+
+/* =====================================================================
+   26. LOGO UPLOAD MODULE
+   Allows user to click on the desktop logo frame to upload a circular logo.
+   Saves it in localStorage and synchronizes it across desktop and mobile logo images.
+   ===================================================================== */
+function initLogoUpload() {
+  const trigger = document.getElementById('logo-frame-trigger');
+  const input = document.getElementById('logo-upload-input');
+  
+  // Elements to synchronize
+  const logoImgDesktop = document.getElementById('logo-image');
+  const logoImgMobile = document.querySelector('.logo-img-mobile');
+  
+  const logoFallbackDesktop = document.getElementById('logo-emoji-fallback');
+  const logoFallbackMobile = document.getElementById('logo-emoji-fallback-mobile');
+
+  // Load from localStorage if present
+  const savedLogo = localStorage.getItem('nadiLogo');
+  if (savedLogo) {
+    syncLogoImages(savedLogo);
+  }
+
+  if (!trigger || !input) return;
+
+  trigger.addEventListener('click', (e) => {
+    // Prevent default anchor action if trigger is inside a link
+    e.preventDefault();
+    e.stopPropagation();
+    input.click();
+  });
+
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (!file) return;
+
+    // Validate type
+    if (!file.type.startsWith('image/')) {
+      showToast('❌ Please select a valid image file.', 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      try {
+        localStorage.setItem('nadiLogo', dataUrl);
+        syncLogoImages(dataUrl);
+        showToast('✨ Logo uploaded and updated successfully!', 'success');
+      } catch (err) {
+        console.error('Local storage error:', err);
+        showToast('⚠️ Image too large to save offline. Updated for this session.', 'info');
+        syncLogoImages(dataUrl);
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function syncLogoImages(dataUrl) {
+    if (logoImgDesktop) {
+      logoImgDesktop.src = dataUrl;
+      logoImgDesktop.style.display = 'block';
+    }
+    if (logoImgMobile) {
+      logoImgMobile.src = dataUrl;
+      logoImgMobile.style.display = 'block';
+    }
+    if (logoFallbackDesktop) {
+      logoFallbackDesktop.style.display = 'none';
+    }
+    if (logoFallbackMobile) {
+      logoFallbackMobile.style.display = 'none';
+    }
+  }
+}
+
+/* =====================================================================
+   27. THEME SWITCHER MODULE
+   Allows user to toggle a side theme selector panel and switch between
+   5 colors (purple, white, orange, red, blue).
+   Saves selection in localStorage for persistence.
+   ===================================================================== */
+function initThemeSwitcher() {
+  const container = document.getElementById('themeSwitcher');
+  const trigger = document.getElementById('themeTrigger');
+  const dots = document.querySelectorAll('.theme-dot-btn');
+
+  // Load saved theme if present
+  const savedTheme = localStorage.getItem('nadiTheme') || 'purple';
+  applyTheme(savedTheme);
+
+  if (!trigger || !container) return;
+
+  // Toggle switcher open state
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    container.classList.toggle('open');
+  });
+
+  // Close panel on outside clicks
+  document.addEventListener('click', (e) => {
+    if (container && container.classList.contains('open') && !container.contains(e.target)) {
+      container.classList.remove('open');
+    }
+  });
+
+  // Bind clicks to theme selector dots
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const theme = dot.getAttribute('data-theme');
+      if (theme) {
+        applyTheme(theme);
+        container.classList.remove('open');
+        showToast(`🎨 Theme changed to ${theme.toUpperCase()}!`, 'success');
+      }
+    });
+  });
+
+  function applyTheme(themeName) {
+    // Apply dataset attribute on HTML element
+    document.documentElement.setAttribute('data-theme', themeName);
+    
+    // Persist selection
+    localStorage.setItem('nadiTheme', themeName);
+
+    // Sync active state in UI dots
+    dots.forEach(dot => {
+      if (dot.getAttribute('data-theme') === themeName) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+}
+

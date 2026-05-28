@@ -40,6 +40,18 @@ const VALID_PLANS = [
   'Nadi Jyotish Consultation',
   'Name Numerology',
   'Tarot Card Reading',
+  'Main Consultation - Single',
+  'Main Consultation - Full',
+  'Main Consultation - Premium',
+  'Reiki & Lama Fera Healing Sessions',
+  'Vedic Card Reading',
+  'Face Reading Course',
+  'Bhrigu Nandi Nadi Course',
+  'Vedic Numerology Course',
+  'Jamakol Prasannam Course',
+  'Palmistry Course',
+  'Meditation Workshop',
+  'Healing Session',
 ];
 
 const VALID_CONSULTATION_TYPES = [
@@ -53,6 +65,16 @@ const VALID_CONSULTATION_TYPES = [
   'Ancient Mystical Protocols & Divine Yantras',
   'Nadi Jyotish Consultation',
   'Tarot Card Reading',
+  'Main Consultation Service',
+  'Reiki & Lama Fera Healing Sessions',
+  'Vedic Card Reading',
+  'Face Reading Course',
+  'Bhrigu Nandi Nadi Course',
+  'Vedic Numerology Course',
+  'Jamakol Prasannam Course',
+  'Palmistry Course',
+  'Meditation Workshop',
+  'Healing Session',
 ];
 
 // =====================================================

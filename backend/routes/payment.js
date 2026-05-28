@@ -62,6 +62,18 @@ const PLAN_AMOUNTS = {
   'Nadi Jyotish Consultation':                   2100000, // ₹21000
   'Name Numerology':                             210000,  // ₹2100
   'Tarot Card Reading':                          49900,   // ₹499
+  'Main Consultation - Single':                  49900,   // ₹499
+  'Main Consultation - Full':                    110000,  // ₹1100
+  'Main Consultation - Premium':                 210000,  // ₹2100
+  'Reiki & Lama Fera Healing Sessions':          49900,   // ₹499
+  'Vedic Card Reading':                          49900,   // ₹499
+  'Face Reading Course':                         1200000, // ₹12000
+  'Bhrigu Nandi Nadi Course':                    1400000, // ₹14000
+  'Vedic Numerology Course':                     1400000, // ₹14000
+  'Jamakol Prasannam Course':                    900000,  // ₹9000
+  'Palmistry Course':                            1400000, // ₹14000
+  'Meditation Workshop':                         299900,  // ₹2999
+  'Healing Session':                             50000,   // ₹500
 };
 
 // ---- In-memory orders store ----
