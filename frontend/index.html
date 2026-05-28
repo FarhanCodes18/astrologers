@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="white">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,8 +26,8 @@
     <div class="container nav-container">
       <!-- Logo -->
       <a href="#home" class="logo" aria-label="Astronadi Home">
-        <div class="logo-frame" id="logo-frame-trigger" title="Click to upload logo">
-          <img src="logo.png" alt="🔮" class="logo-img" id="logo-image" onerror="this.style.display='none'; document.getElementById('logo-emoji-fallback').style.display='block';" />
+        <div class="logo-frame" id="logo-frame-trigger" title="Click to upload logo" style="width: 48px; height: 48px; max-width: 48px; max-height: 48px; overflow: hidden; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+          <img src="logo.png" alt="🔮" class="logo-img" id="logo-image" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none'; document.getElementById('logo-emoji-fallback').style.display='block';" />
           <span class="logo-icon" id="logo-emoji-fallback" style="display: none;">🔮</span>
           <input type="file" id="logo-upload-input" accept="image/*" style="display: none;" />
         </div>
@@ -47,20 +47,6 @@
  
       <!-- CTA + Hamburger -->
       <div class="nav-actions">
-        <!-- Theme Switcher dropdown -->
-        <div class="theme-dropdown-container" id="themeSwitcher">
-          <button class="theme-trigger-btn" id="themeTrigger" aria-label="Toggle Theme Panel" title="Change Theme">
-            🎨
-          </button>
-          <div class="theme-options-panel" id="themePanel">
-            <button class="theme-dot-btn theme-purple active" data-theme="purple" title="Purple Theme" aria-label="Purple Theme"></button>
-            <button class="theme-dot-btn theme-white" data-theme="white" title="White Theme" aria-label="White Theme"></button>
-            <button class="theme-dot-btn theme-orange" data-theme="orange" title="Orange Theme" aria-label="Orange Theme"></button>
-            <button class="theme-dot-btn theme-red" data-theme="red" title="Red Theme" aria-label="Red Theme"></button>
-            <button class="theme-dot-btn theme-blue" data-theme="blue" title="Blue Theme" aria-label="Blue Theme"></button>
-          </div>
-        </div>
-
         <a href="#services" class="btn btn-gold btn-sm" id="book-now-btn">✨ Book Now</a>
         <button class="hamburger" id="hamburger-btn" aria-label="Toggle mobile menu" aria-expanded="false">
           <span class="bar"></span>
@@ -74,8 +60,8 @@
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <div class="mobile-menu-header" style="display: flex; justify-content: center; padding-bottom: 16px; margin-bottom: 8px; border-bottom: 1px solid rgba(142, 98, 217, 0.1);">
         <div class="logo">
-          <div class="logo-frame">
-            <img src="logo.png" alt="🔮" class="logo-img logo-img-mobile" onerror="this.style.display='none'; document.getElementById('logo-emoji-fallback-mobile').style.display='block';" />
+          <div class="logo-frame" style="width: 48px; height: 48px; max-width: 48px; max-height: 48px; overflow: hidden; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <img src="logo.png" alt="🔮" class="logo-img logo-img-mobile" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none'; document.getElementById('logo-emoji-fallback-mobile').style.display='block';" />
             <span class="logo-icon" id="logo-emoji-fallback-mobile" style="display: none;">🔮</span>
           </div>
           <span class="logo-text">Astro<span class="logo-highlight">nadi</span></span>
@@ -214,7 +200,7 @@
   </section>
 
   <!-- ===================== ABOUT US SECTION ===================== -->
-  <section id="about" class="about-section section-padding" aria-label="About Jaykanth Malhasi">
+  <section id="about" class="about-section section-padding" aria-label="About Jayknth Malhasi">
     <div class="container">
       <div class="about-grid">
         <!-- Left: Image & Accents -->
@@ -224,7 +210,7 @@
           <div class="about-image-card glass-card shimmer">
             <picture>
               <source srcset="astrolger.webp" type="image/webp">
-              <img src="astrolger.png" alt="Jaykanth Malhasi - Nadi Astrologer" class="about-img" loading="lazy" onload="this.closest('.about-image-card').classList.remove('shimmer')" />
+              <img src="astrolger.png" alt="Jayknth Malhasi - Nadi Astrologer" class="about-img" loading="lazy" onload="this.closest('.about-image-card').classList.remove('shimmer')" />
             </picture>
             <div class="about-badge">
               <span class="badge-icon">🔱</span>
@@ -239,12 +225,12 @@
         <!-- Right: Content -->
         <div class="about-content">
           <div class="section-badge">✨ Meet the Astrologer</div>
-          <h2 class="about-title">Jaykanth Malhasi</h2>
+          <h2 class="about-title">Jayknth Malhasi</h2>
           <p class="about-subtitle">Renowned Nadi Astrologer, Occult Researcher & Healer</p>
           
           <div class="about-description">
             <p>
-              <strong>Jaykanth Malhasi</strong> is a renowned Nadi Astrologer and occult researcher with deep expertise in Vedic Numerology, Nadi Jyotish (UT), Bhrigu Nadi, Bhrigu Nandi Nadi, Vedic Astrology, KP Astrology, and various South Indian Prashna techniques. For the past 10 years, he has been continuously studying astrology and occult sciences as a dedicated student while also mentoring and teaching thousands of students.
+              <strong>Jayknth Malhasi</strong> is a renowned Nadi Astrologer and occult researcher with deep expertise in Vedic Numerology, Nadi Jyotish (UT), Bhrigu Nadi, Bhrigu Nandi Nadi, Vedic Astrology, KP Astrology, and various South Indian Prashna techniques. For the past 10 years, he has been continuously studying astrology and occult sciences as a dedicated student while also mentoring and teaching thousands of students.
             </p>
             <p>
               Along with astrology, he actively practices several healing modalities such as Reiki, Lama Fera, Tibetan Healing, and Shambhavi. Initiated into the Nath tradition by Guru Shri Goverdhan Das Ji Maharaj, he is devoted to the path of spiritual practice and sadhana. He is also highly regarded for his expertise in spiritual protection and Black Magic Removal practices.
@@ -310,15 +296,15 @@
           <p class="service-desc">Get trusted consultation for kundli, career, marriage, love, Vastu, numerology, and black magic removal. Transform your life with ancient wisdom, spiritual remedies, and cosmic insights.</p>
           <div class="service-pricing-options">
             <select class="service-option-select" onchange="updateServicePrice(this)" aria-label="Main Consultation Options">
-              <option value="Main Consultation - Single" data-price="499" data-amount="49900">Single Question — ₹499</option>
+              <option value="Main Consultation - Single" data-price="251" data-amount="25100">Single Question — ₹251</option>
               <option value="Main Consultation - Full" data-price="1,100" data-amount="110000">Online Full Consultation — ₹1,100</option>
               <option value="Main Consultation - Premium" data-price="2,100" data-amount="210000">Offline Consultation — ₹2,100</option>
             </select>
           </div>
           <button class="btn btn-gold btn-sm pay-btn service-book-btn" 
                   data-plan="Main Consultation - Single" 
-                  data-amount="49900">
-            ✨ Book Now — ₹499
+                  data-amount="25100">
+            ✨ Book Now — ₹251
           </button>
         </article>
 
@@ -497,6 +483,11 @@
           <h3>Career Guidance</h3>
           <p>Get clarity on your career path, job prospects, business growth, and professional success based on cosmic alignments.</p>
         </div>
+        <div class="problem-card" id="prob-black-magic">
+          <div class="problem-icon">🔱</div>
+          <h3>Black Magic Removal</h3>
+          <p>Get spiritual protection and remove negative energies, evil eye, or black magic effects through Vedic rituals.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -507,7 +498,7 @@
       <div class="section-header">
         <div class="section-badge">🎓 Learn the Occult</div>
         <h2 class="section-title">Professional Astrology Courses</h2>
-        <p class="section-subtitle">Deep dive into ancient predicting methods with structured training mentored by Jaykanth Malhasi</p>
+        <p class="section-subtitle">Deep dive into ancient predicting methods with structured training mentored by Jayknth Malhasi</p>
       </div>
 
       <div class="courses-grid">
@@ -602,12 +593,12 @@
           </div>
         </article>
 
-        <!-- 4. Jamkol B -->
+        <!-- 4. Jamakol B -->
         <article class="course-card glass-card">
           <div class="course-header">
             <div class="course-icon">🏹</div>
-            <h3 class="course-card-title">Jamkol B</h3>
-            <p class="course-card-sub">Instant Query Resolution &amp; South Indian Prashna</p>
+            <h3 class="course-card-title">Jamakol B</h3>
+            <p class="course-card-sub">South Indian Prashana Technique</p>
           </div>
           <div class="course-body">
             <p class="course-desc">Master the highly accurate Jamakol Prasannam system, the rapid South Indian transit-based query resolution method.</p>
@@ -687,36 +678,6 @@
             <button class="btn btn-gold pay-btn course-enroll-btn" 
                     data-plan="Meditation Workshop" 
                     data-amount="299900">
-              ✨ Enroll Now
-            </button>
-          </div>
-        </article>
-
-        <!-- 7. Healing Session -->
-        <article class="course-card glass-card">
-          <div class="course-header">
-            <div class="course-icon">🙌</div>
-            <h3 class="course-card-title">Spiritual Healing Session</h3>
-            <p class="course-card-sub">Reiki, Lama Fera or Tibetan Spiritual Protection</p>
-          </div>
-          <div class="course-body">
-            <p class="course-desc">Personalized energy healing session (Reiki, Lama Fera, or Tibetan) to restore spiritual protection and remove energy blockages.</p>
-            <ul class="course-features">
-              <li><span class="feature-bullet">💻</span> <strong>Mode:</strong> In-Person / Remote Session</li>
-              <li><span class="feature-bullet">⏱️</span> <strong>Duration:</strong> 30-45 Minutes per Seating</li>
-              <li><span class="feature-bullet">🔱</span> <strong>Practitioner:</strong> Devoted disciple in Nath Tradition</li>
-              <li><span class="feature-bullet">🌀</span> <strong>Focus:</strong> Chakra Balancing &amp; Negativity Removal</li>
-              <li><span class="feature-bullet">💬</span> <strong>Support:</strong> Spiritual Guidance &amp; Advice</li>
-            </ul>
-          </div>
-          <div class="course-footer">
-            <div class="course-price-box">
-              <span class="course-price-lbl">Fee per Session</span>
-              <div class="course-price">₹500</div>
-            </div>
-            <button class="btn btn-gold pay-btn course-enroll-btn" 
-                    data-plan="Healing Session" 
-                    data-amount="50000">
               ✨ Enroll Now
             </button>
           </div>
@@ -1199,7 +1160,7 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>© 2026 Astronadi. All Rights Reserved. Made with ✨ and cosmic energy. | Designed by CloudNovaa</p>
+        <p>© 2026 Astronadi. All Rights Reserved. Made with ✨ and cosmic energy. | Designed by <a href="https://cloudnovaa.com" target="_blank" rel="noopener noreferrer" class="designer-highlight">CloudNovaa</a></p>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
@@ -1284,10 +1245,9 @@
               <option value="Face Reading Course">📖 Face Reading Course</option>
               <option value="Bhrigu Nandi Nadi Course">🪐 Bhrigu Nandi Nadi Course</option>
               <option value="Vedic Numerology Course">🔢 Vedic Numerology Course</option>
-              <option value="Jamakol Prasannam Course">🏹 Jamkol B Course</option>
+              <option value="Jamakol Prasannam Course">🏹 Jamakol B Course</option>
               <option value="Palmistry Course">✋ Palmistry Course</option>
               <option value="Meditation Workshop">🧘 Meditation Workshop</option>
-              <option value="Healing Session">🙌 Healing Session</option>
             </select>
             <span class="field-error" id="err-b-type"></span>
           </div>

@@ -16,16 +16,16 @@
 
   /* Purple Spectrum */
   --purple-deep: #0a0416; /* Deep luxury purple */
-  --purple-mid: #8a57e6;  /* Vivid violet purple */
-  --purple-light: #b388ff; /* Soft lavender glow */
-  --purple-glow: rgba(179, 136, 255, 0.15);
+  --purple-mid: #681f96;  /* Rich purple/violet from logo lotus */
+  --purple-light: #b75be3; /* Glowing lavender from logo center */
+  --purple-glow: rgba(183, 91, 227, 0.15);
 
   /* Gold Accent System - Premium Soft Gold */
-  --gold-primary: #d4af37; /* Luxury metallic gold */
-  --gold-secondary: #f6c90e;
-  --gold-light: #ffeb99;
+  --gold-primary: #c59b27; /* Rich luxury gold from logo text */
+  --gold-secondary: #d4af37; /* Warm accent gold */
+  --gold-light: #ffe5aa;
   --gold-dark: #8c6d1f;
-  --gold-glow: rgba(212, 175, 55, 0.25);
+  --gold-glow: rgba(197, 155, 39, 0.25);
 
   /* Text Colors */
   --text-primary: #f5f0ff; /* Off-white with purple tint, highly readable on dark bg */
@@ -35,8 +35,8 @@
 
   /* Gradients */
   --gradient-hero: linear-gradient(135deg, #13072e 0%, #070314 50%, #1c0529 100%); /* Deep dark cosmic space */
-  --gradient-gold: linear-gradient(135deg, #f6c90e 0%, #d4af37 50%, #99781a 100%);
-  --gradient-purple: linear-gradient(135deg, #b388ff 0%, #5e3b9b 100%);
+  --gradient-gold: linear-gradient(135deg, #d4af37 0%, #c59b27 50%, #8c6d1f 100%);
+  --gradient-purple: linear-gradient(135deg, #b75be3 0%, #681f96 100%);
   --gradient-card: linear-gradient(145deg, rgba(27, 14, 53, 0.8) 0%, rgba(13, 6, 26, 0.8) 100%);
   --gradient-cosmic: linear-gradient(180deg, #0a0416 0%, #130925 50%, #1b0e35 100%);
 
@@ -308,6 +308,9 @@ input, textarea, select { font-family: inherit; }
 .logo-frame {
   width: 48px;
   height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid var(--gold-primary);
@@ -315,7 +318,7 @@ input, textarea, select { font-family: inherit; }
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--bg-tertiary);
+  background: #ffffff;
   box-shadow: 0 0 12px var(--gold-glow), 0 0 8px rgba(142, 98, 217, 0.15);
   transition: var(--transition-mid);
   cursor: pointer;
@@ -330,6 +333,8 @@ input, textarea, select { font-family: inherit; }
 .logo-img {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -3312,14 +3317,14 @@ body::before {
   --purple-mid: #5e3b9b;
   --purple-light: #8e62d9;
   --purple-glow: rgba(142, 98, 217, 0.12);
-  --gold-primary: #c59b27;
-  --gold-secondary: #d4af37;
+  --gold-primary: #a67c00; /* Darker, high-contrast gold */
+  --gold-secondary: #c59b27;
   --gold-light: #f3e5ab;
   --gold-glow: rgba(212, 175, 55, 0.15);
-  --text-primary: #1e0f35; /* Dark navy text */
-  --text-secondary: #584a75;
-  --text-muted: #8b7d9d;
-  --text-gold: #c59b27;
+  --text-primary: #0e041e; /* Extremely dark deep purple-black for headings and primary text */
+  --text-secondary: #2d1e46; /* Deep purple-navy for standard body text / subtext */
+  --text-muted: #4e3f66; /* Darker muted violet-gray for placeholders/labels */
+  --text-gold: #997000; /* Rich gold/ochre for high-contrast warnings/highlights */
   --gradient-hero: linear-gradient(135deg, #fbf8fe 0%, #f4ecff 45%, #fff2f6 100%);
   --gradient-purple: linear-gradient(135deg, #8e62d9 0%, #5e3b9b 100%);
   --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
@@ -3328,6 +3333,52 @@ body::before {
   --border-purple: 1px solid rgba(142, 98, 217, 0.25);
   --shadow-sm: 0 4px 20px rgba(107, 70, 193, 0.08);
   --shadow-md: 0 8px 40px rgba(107, 70, 193, 0.12);
+}
+
+[data-theme="white"] .navbar {
+  background: #f4ecff;
+  border-bottom: 1px solid rgba(142, 98, 217, 0.08);
+}
+
+[data-theme="white"] .navbar.scrolled {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(142, 98, 217, 0.15);
+  box-shadow: 0 4px 20px rgba(107, 70, 193, 0.06);
+}
+
+[data-theme="white"] .hero-badge {
+  color: var(--gold-primary);
+  border-color: rgba(166, 124, 0, 0.25);
+  background: rgba(166, 124, 0, 0.05);
+}
+
+[data-theme="white"] .service-link:hover {
+  color: var(--gold-primary);
+}
+
+[data-theme="white"] .faq-question[aria-expanded="true"] .faq-icon {
+  color: var(--gold-primary);
+}
+
+[data-theme="white"] .form-group select {
+  background-color: var(--bg-glass);
+  border: var(--border-glass);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e62d9'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+
+[data-theme="white"] .form-group select:focus {
+  background-color: var(--bg-glass-hover);
+}
+
+[data-theme="white"] .form-group select option {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="white"] .form-group input[type="date"],
+[data-theme="white"] .form-group input[type="time"] {
+  color-scheme: light;
 }
 
 /* 3. Orange Theme */
@@ -3497,5 +3548,46 @@ body::before {
 .theme-orange { background: #e67e22; }
 .theme-red    { background: #e74c3c; }
 .theme-blue   { background: #3498db; }
+
+/* =====================================================================
+   DESIGNER BRANDING HIGHLIGHT (FOOTER BOTTOM)
+   ===================================================================== */
+.designer-highlight {
+  font-weight: 800;
+  color: var(--gold-primary);
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+  position: relative;
+  display: inline-block;
+  transition: var(--transition-bounce);
+  text-decoration: none;
+}
+
+.designer-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: var(--transition-mid);
+  border-radius: var(--radius-full);
+}
+
+.designer-highlight:hover {
+  transform: scale(1.08) translateY(-1px);
+  filter: brightness(1.2) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.45));
+}
+
+.designer-highlight:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
 

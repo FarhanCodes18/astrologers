@@ -42,6 +42,25 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
 // Add your Razorpay Key ID here (matches the one in .env)
 const RAZORPAY_KEY_ID = 'rzp_test_YourRazorpayKeyHere';
 
+/** Safe LocalStorage wrapper to prevent crashes in blocked/private/sandboxed environments */
+const storage = {
+  get(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      console.warn('Storage read failed:', e);
+      return null;
+    }
+  },
+  set(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn('Storage write failed:', e);
+    }
+  }
+};
+
 /** Available consultation time slots */
 const TIME_SLOTS = [
   '09:00 AM - 10:00 AM',
@@ -56,7 +75,7 @@ const TIME_SLOTS = [
 
 /** Plan metadata — maps plan name to its display info */
 const PLAN_META = {
-  'Main Consultation - Single':                  { icon: '🔮', duration: 'Single Question',    price: 499   },
+  'Main Consultation - Single':                  { icon: '🔮', duration: 'Single Question',    price: 251   },
   'Main Consultation - Full':                    { icon: '🔮', duration: 'Full Consultation',  price: 1100  },
   'Main Consultation - Premium':                 { icon: '🔮', duration: 'Offline Consultation', price: 2100  },
   'Reiki & Lama Fera Healing Sessions':          { icon: '🙌', duration: '15 Min Session',     price: 499   },
@@ -70,10 +89,9 @@ const PLAN_META = {
   'Face Reading Course':                         { icon: '📖', duration: 'Advance Course',     price: 12000 },
   'Bhrigu Nandi Nadi Course':                    { icon: '🪐', duration: 'Nadi Course',         price: 14000 },
   'Vedic Numerology Course':                     { icon: '🔢', duration: 'Numerology Course',  price: 14000 },
-  'Jamakol Prasannam Course':                    { icon: '🏹', duration: 'Jamkol B Course',    price: 9000  },
+  'Jamakol Prasannam Course':                    { icon: '🏹', duration: 'Jamakol B Course',    price: 9000  },
   'Palmistry Course':                            { icon: '✋', duration: 'Palmistry Course',   price: 14000 },
   'Meditation Workshop':                         { icon: '🧘', duration: 'Meditation Workshop', price: 2999  },
-  'Healing Session':                             { icon: '🙌', duration: 'Spiritual Session',  price: 500   },
 };
 
 
@@ -1577,7 +1595,7 @@ function initLogoUpload() {
   const logoFallbackMobile = document.getElementById('logo-emoji-fallback-mobile');
 
   // Load from localStorage if present
-  const savedLogo = localStorage.getItem('nadiLogo');
+  const savedLogo = storage.get('nadiLogo');
   if (savedLogo) {
     syncLogoImages(savedLogo);
   }
@@ -1605,7 +1623,7 @@ function initLogoUpload() {
     reader.onload = (e) => {
       const dataUrl = e.target.result;
       try {
-        localStorage.setItem('nadiLogo', dataUrl);
+        storage.set('nadiLogo', dataUrl);
         syncLogoImages(dataUrl);
         showToast('✨ Logo uploaded and updated successfully!', 'success');
       } catch (err) {
@@ -1646,8 +1664,8 @@ function initThemeSwitcher() {
   const trigger = document.getElementById('themeTrigger');
   const dots = document.querySelectorAll('.theme-dot-btn');
 
-  // Load saved theme if present
-  const savedTheme = localStorage.getItem('nadiTheme') || 'purple';
+  // Load saved theme if present (default to white)
+  const savedTheme = 'white';
   applyTheme(savedTheme);
 
   if (!trigger || !container) return;
@@ -1682,7 +1700,7 @@ function initThemeSwitcher() {
     document.documentElement.setAttribute('data-theme', themeName);
     
     // Persist selection
-    localStorage.setItem('nadiTheme', themeName);
+    storage.set('nadiTheme', themeName);
 
     // Sync active state in UI dots
     dots.forEach(dot => {
