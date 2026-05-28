@@ -2522,7 +2522,6 @@ a.contact-item-value:hover { color: var(--gold-primary); }
   /* UPI Modal mobile responsive */
   .upi-modal-container { max-width: 100%; }
   .upi-modal-body { padding: 20px 20px 24px; }
-  .upi-qr-box { display: none !important; }
   .btn-launch-upi { display: inline-flex !important; }
   .desktop-instructions { display: none !important; }
 }
@@ -3214,5 +3213,21 @@ body::before {
   .zodiac-orbit {
     animation: orbit-rotate 40s linear infinite; /* Slow down rotation to save CPU */
   }
+}
+
+/* Rendering performance: content-visibility for offscreen sections */
+.about-section,
+.services-section,
+.problems-section,
+.courses-section,
+.kundli-section,
+.how-section,
+.horoscope-section,
+.testimonials-section,
+.faq-section,
+.contact-section,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 

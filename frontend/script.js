@@ -35,7 +35,7 @@
    1. CONSTANTS & GLOBAL STATE
    ===================================================================== */
 
-const API_BASE_URL = 'https://astrologers.onrender.com';
+const API_BASE_URL = 'https://astrologers.onrender.com/api';
 
 // Add your Razorpay Key ID here (matches the one in .env)
 const RAZORPAY_KEY_ID = 'rzp_test_YourRazorpayKeyHere';
@@ -913,6 +913,11 @@ async function initiatePayment(formData) {
     if (planNameEl) planNameEl.textContent = plan;
     if (amountValEl) amountValEl.textContent = `₹${amountRupees.toLocaleString('en-IN')}`;
 
+    // Always set QR code image source for scanning, even on mobile
+    if (qrCodeImg) {
+      qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+    }
+
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (isMobile) {
@@ -922,10 +927,6 @@ async function initiatePayment(formData) {
       }
       // Auto redirect on mobile device to deep link
       window.location.href = upiLink;
-    } else {
-      if (qrCodeImg) {
-        qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
-      }
     }
 
     if (btn) setButtonLoading(btn, false, originalText);
